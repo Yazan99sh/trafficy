@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'package:appwrite/appwrite.dart';
 import 'package:injectable/injectable.dart';
+import 'package:trafficy_client/consts/urls.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_auth/state_manager/login_state_manager/login_state_manager.dart';
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state.dart';
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state_init.dart';
 import 'package:flutter/material.dart';
+import 'package:trafficy_client/module_splash/splash_routes.dart';
 import 'package:trafficy_client/utils/components/custom_app_bar.dart';
 import 'package:trafficy_client/utils/helpers/custom_flushbar.dart';
 
@@ -27,11 +30,9 @@ class LoginScreenState extends State<LoginScreen> {
     if (mounted) setState(() {});
   }
 
-  int? returnToMainScreen;
-  bool? returnToPreviousScreen;
   @override
   void initState() {
-    loadingSnapshot = AsyncSnapshot.nothing();
+    loadingSnapshot = const AsyncSnapshot.nothing();
     _currentStates = LoginStateInit(this);
     _stateSubscription = widget._stateManager.stateStream.listen((event) {
       if (mounted) {
@@ -41,7 +42,7 @@ class LoginScreenState extends State<LoginScreen> {
       }
     });
     widget._stateManager.loadingStream.listen((event) {
-      if (this.mounted) {
+      if (mounted) {
         setState(() {
           loadingSnapshot = event;
         });
@@ -53,47 +54,27 @@ class LoginScreenState extends State<LoginScreen> {
   dynamic args;
   @override
   Widget build(BuildContext context) {
-    args = ModalRoute.of(context)?.settings.arguments;
-    if (args != null) {
-      if (args is bool) returnToPreviousScreen = args;
-      if (args is int) returnToMainScreen = args;
-    }
-    return WillPopScope(
-      onWillPop: () async {
-        // await Navigator.of(context)
-        //     .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
-         return returnToMainScreen == null;
+    return GestureDetector(
+      onTap: () {
+        var focus = FocusScope.of(context);
+        if (focus.canRequestFocus) {
+          focus.unfocus();
+        }
       },
-      child: GestureDetector(
-        onTap: () {
-          var focus = FocusScope.of(context);
-          if (focus.canRequestFocus) {
-            focus.unfocus();
-          }
-        },
-        child: Scaffold(
-          appBar: CustomTwaslnaAppBar.appBar(context,
-              title: S.of(context).login,
-              onTap: returnToMainScreen != null
-                  ? () {
-
-                      // Navigator.of(context).pushNamedAndRemoveUntil(
-                      //     MainRoutes.MAIN_SCREEN, (route) => false);
-
-                    }
-                  : null),
-          body: loadingSnapshot.connectionState != ConnectionState.waiting
-              ? _currentStates.getUI(context)
-              : Stack(
-                  children: [
-                    _currentStates.getUI(context),
-                    Container(
-                      width: double.maxFinite,
-                      color: Colors.transparent.withOpacity(0.0),
-                    ),
-                  ],
-                ),
-        ),
+      child: Scaffold(
+        appBar: CustomTwaslnaAppBar.appBar(context,
+            title: S.of(context).login, canGoBack: false),
+        body: loadingSnapshot.connectionState != ConnectionState.waiting
+            ? _currentStates.getUI(context)
+            : Stack(
+                children: [
+                  _currentStates.getUI(context),
+                  Container(
+                    width: double.maxFinite,
+                    color: Colors.transparent.withOpacity(0.0),
+                  ),
+                ],
+              ),
       ),
     );
   }
@@ -109,18 +90,9 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    if (returnToMainScreen != null) {
-      // Navigator.of(context).pushNamedAndRemoveUntil(
-      //     MainRoutes.MAIN_SCREEN, (route) => false,
-      //     arguments: returnToMainScreen);
-    
-    } else if (returnToPreviousScreen != null) {
-      Navigator.of(context).pop();
-    } else {
-      // Navigator.of(context)
-      //     .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
-    
-    }
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(SplashRoutes.SPLASH_SCREEN, (route) => false);
+
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)
         .show(context);

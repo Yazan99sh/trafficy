@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trafficy_client/generated/l10n.dart';
 
 class AuthButtons extends StatelessWidget {
   final String firstButtonTitle;
@@ -7,7 +6,7 @@ class AuthButtons extends StatelessWidget {
   final VoidCallback? firstButtonTab;
   final VoidCallback secondButtonTab;
   final bool? loading;
-  AuthButtons(
+  const AuthButtons(
       {required this.firstButtonTitle,
       required this.secondButtonTitle,
       this.firstButtonTab,
@@ -39,7 +38,7 @@ class AuthButtons extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0, left: 16, bottom: 8.0),
-            child: Container(
+            child: SizedBox(
               width: double.maxFinite,
               height: 50,
               child: ElevatedButton(
@@ -53,7 +52,7 @@ class AuthButtons extends StatelessWidget {
                   ),
                   child: Center(
                     child: loading!
-                        ? CircularProgressIndicator(
+                        ? const CircularProgressIndicator(
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(Colors.white),
                           )
@@ -71,7 +70,7 @@ class AuthButtons extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
                 right: 16.0, left: 16, bottom: 8.0, top: 8.0),
-            child: Container(
+            child: SizedBox(
               width: double.maxFinite,
               height: 50,
               child: ElevatedButton(
@@ -86,7 +85,9 @@ class AuthButtons extends StatelessWidget {
                   child: Center(
                     child: Text(
                       secondButtonTitle,
-                      style: TextStyle(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                          color: Theme.of(context).textTheme.bodyText1?.color),
                     ),
                   )),
             ),

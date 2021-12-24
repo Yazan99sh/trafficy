@@ -1,4 +1,7 @@
+import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:injectable/injectable.dart';
+import 'package:trafficy_client/consts/urls.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_auth/enums/auth_status.dart';
 import 'package:trafficy_client/module_auth/exceptions/auth_exception.dart';
@@ -10,6 +13,7 @@ import 'package:trafficy_client/module_auth/response/login_response/login_respon
 import 'package:rxdart/rxdart.dart';
 import 'package:trafficy_client/module_auth/response/regester_response/regester_response.dart';
 import 'package:trafficy_client/utils/helpers/status_code_helper.dart';
+import 'package:trafficy_client/utils/logger/logger.dart';
 
 @Injectable()
 class AuthService {
@@ -28,38 +32,32 @@ class AuthService {
   String get username => _prefsHelper.getUsername() ?? '';
 
   Future<void> loginApi(String username, String password) async {
-    LoginResponse? loginResult = await _authManager.login(LoginRequest(
-      username: username,
-      password: password,
-    ));
-    if (loginResult == null) {
-      await logout();
-      _authSubject.addError(S.current.networkError);
-      throw AuthorizationException(S.current.networkError);
-    } else if (loginResult.statusCode == '401') {
-      await logout();
-      _authSubject.addError(S.current.invalidCredentials);
-      throw AuthorizationException(S.current.networkError);
-    } else if (loginResult.token == null) {
-      await logout();
-      _authSubject.addError(StatusCodeHelper.getStatusCodeMessages(
-          loginResult.statusCode ?? '0'));
-      throw AuthorizationException(StatusCodeHelper.getStatusCodeMessages(
-          loginResult.statusCode ?? '0'));
+    Client client = Client();
+    client
+        .setEndpoint(Urls.APPWRITE_ENDPOINT)
+        .setProject(Urls.APPWRITE_PROJECTID);
+
+    Account account = Account(client);
+    account.deleteSessions();
+    Logger().info('Login ==>', 'Username => $username');
+    Logger().info('Login ==>', 'Password => $password');
+    // AppwriteException
+    try {
+      Session result = await account.createSession(
+        email: username,
+        password: password,
+      );
+      _prefsHelper.setToken(result.providerToken);
+      _prefsHelper.setUsername(username);
+      _prefsHelper.setPassword(password);
+      _authSubject.add(AuthStatus.AUTHORIZED);
+    } catch (e) {
+      e as AppwriteException;
+      Logger().info('Login Response => ', e.response.toString());
+      String error = StatusCodeHelper.getStatusCodeMessages(e.code.toString());
+      _authSubject.addError(error);
+      throw AuthorizationException(error);
     }
-    RegisterResponse? response = await _authManager.userTypeCheck(
-        'ROLE_CLIENT', loginResult.token ?? '');
-    if (response?.statusCode != '201') {
-      await logout();
-      _authSubject.addError(
-          StatusCodeHelper.getStatusCodeMessages(response?.statusCode ?? '0'));
-      throw AuthorizationException(
-          StatusCodeHelper.getStatusCodeMessages(response?.statusCode ?? '0'));
-    }
-    _prefsHelper.setUsername(username);
-    _prefsHelper.setPassword(password);
-    _prefsHelper.setToken(loginResult.token);
-    _authSubject.add(AuthStatus.AUTHORIZED);
   }
 
   Future<void> registerApi(RegisterRequest request) async {
@@ -80,17 +78,18 @@ class AuthService {
 
   Future<String?> getToken() async {
     try {
-      var tokenDate = this._prefsHelper.getTokenDate();
+      var tokenDate = _prefsHelper.getTokenDate();
       var diff = DateTime.now().difference(tokenDate).inMinutes;
       if (diff.abs() > 55) {
-        throw TokenExpiredException('Token is created ${diff} minutes ago');
+        throw TokenExpiredException('Token is created $diff minutes ago');
       }
-      return await this._prefsHelper.getToken();
+      return _prefsHelper.getToken();
     } on AuthorizationException {
       _prefsHelper.deleteToken();
       return null;
     } on TokenExpiredException {
-      return await refreshToken();
+      await refreshToken();
+      return _prefsHelper.getToken();
     } catch (e) {
       await _prefsHelper.cleanAll();
       return null;
@@ -98,20 +97,14 @@ class AuthService {
   }
 
   /// refresh API token, this is done using Firebase Token Refresh
-  Future<String?> refreshToken() async {
-    String? username = await _prefsHelper.getUsername();
-    String? password = await _prefsHelper.getPassword();
-    LoginResponse? loginResponse = await _authManager.login(LoginRequest(
-      username: username,
-      password: password,
-    ));
-    if (loginResponse == null) {
-      await _prefsHelper.cleanAll();
-      return null;
+  Future<void> refreshToken() async {
+    String? username = _prefsHelper.getUsername();
+    String? password = _prefsHelper.getPassword();
+    if (username == null || password == null) {
+      throw const AuthorizationException('error getting token');
     }
-    _prefsHelper.setToken(loginResponse.token);
-
-    return loginResponse.token;
+    await loginApi(username, password);
+    return;
   }
 
   Future<void> logout() async {
