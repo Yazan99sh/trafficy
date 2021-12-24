@@ -1,6 +1,6 @@
+// ignore_for_file: unused_field
+
 import 'dart:async';
-import 'dart:io';
-import 'package:device_info/device_info.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:trafficy_client/abstracts/module/yes_module.dart';
@@ -33,12 +33,12 @@ void main() async {
     FlutterError.onError = (FlutterErrorDetails details) async {
       Logger().error('Main', details.toString(), StackTrace.current);
     };
-    await runZonedGuarded(() {
+    runZonedGuarded(() {
       configureDependencies();
       // Your App Here
       runApp(getIt<MyApp>());
     }, (error, stackTrace) {
-      new Logger().error(
+      Logger().error(
           'Main', error.toString() + stackTrace.toString(), StackTrace.current);
     });
   });
@@ -53,14 +53,14 @@ class MyApp extends StatefulWidget {
   final SettingsModule _settingsModule;
   final ChatModule _chatModule;
 
-  MyApp(
-      this._themeDataService,
-      this._localizationService,
-      this._splashModule,
-      this._authorizationModule,
-      this._chatModule,
-      this._settingsModule,
-      );
+  const MyApp(
+    this._themeDataService,
+    this._localizationService,
+    this._splashModule,
+    this._authorizationModule,
+    this._chatModule,
+    this._settingsModule,
+  );
 
   @override
   State<StatefulWidget> createState() => _MyAppState();
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         locale: Locale.fromSubtags(
           languageCode: lang,
         ),
-        localizationsDelegates: [
+        localizationsDelegates: const [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
