@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class ImageAsset {
   static const ROOT = 'assets/images/';
   static const LOGO = ROOT + 'logo.png';
@@ -8,6 +10,7 @@ class ImageAsset {
   static const DELIVERY_MOTOR = ROOT + 'delivery_splash.png';
   static const EMPTY_SVG = ROOT + 'Empty.svg';
   static const ERROR_SVG = ROOT + 'error.svg';
+  static const TRAFFICY_LOGO = ROOT + 'trafficy.png';
   static const NETWORK = 'https://www.erdeundleben.com/wp-content/uploads/2021/02/folgendes-macht-unser-food-personal-wenn-es-fast-zu-mude-ist-um-zu-kochen-0-Yywyr8ju.jpg';
 }
 
@@ -25,5 +28,7 @@ class SvgAsset {
 class LottieAsset {
   static const ROOT = 'assets/animations/';
   static const LOADING_CART = ROOT + 'cart_loading.json';
+  static const SPLASH_SCREEN = ROOT + 'splash_screen.json';
+  static const LOADING_SCREEN = ROOT + 'loading.json';
 
 }

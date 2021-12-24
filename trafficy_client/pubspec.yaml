@@ -59,7 +59,6 @@ dependencies:
   share: ^2.0.4
   # Network Agent
   dio: ^4.0.0
-  dio_firebase_performance: ^0.3.0
   # Analyzer
   analyzer_plugin: ^0.6.0
   # Time Ago Generator
@@ -101,6 +100,7 @@ dependencies:
   pinch_zoom: ^1.0.0
   fl_chart: ^0.40.0
   flutter_rating_bar: ^4.0.0
+  appwrite: ^2.0.3
 
 
 dev_dependencies:
