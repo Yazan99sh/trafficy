@@ -18,7 +18,7 @@ class CustomDeliverySearch extends StatefulWidget {
   CustomDeliverySearch(
       {this.height = 50,
       this.controller,
-      this.contentPadding = const EdgeInsets.fromLTRB(8,0, 8, 0),
+      this.contentPadding = const EdgeInsets.fromLTRB(8, 0, 8, 0),
       required this.hintText,
       this.onChanged,
       this.readOnly = false,
@@ -31,42 +31,47 @@ class _CustomDeliverySearchState extends State<CustomDeliverySearch> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: widget.background != null ? widget.background : Theme.of(context).scaffoldBackgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child:Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(width: 8.0,),
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).primaryColor
+        color: widget.background != null
+            ? widget.background
+            : Theme.of(context).scaffoldBackgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 8.0,
             ),
-            child:Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.search,color: Colors.white,),
-            ),
-          ),
-          Expanded(
-            child: TextField(
-              controller: widget.controller,
-              autofocus: widget.autoFocus,
-              onChanged: widget.onChanged,
-              readOnly: widget.readOnly,
-              onTap: widget.onTap,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: widget.hintText,
-                enabledBorder: InputBorder.none,
-                contentPadding: widget.contentPadding,
-                focusedBorder: InputBorder.none,
+            Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).primaryColor),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
               ),
             ),
-          )
-        ],
-      )
-    );
+            Expanded(
+              child: TextField(
+                controller: widget.controller,
+                autofocus: widget.autoFocus,
+                onChanged: widget.onChanged,
+                readOnly: widget.readOnly,
+                onTap: widget.onTap,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: widget.hintText,
+                  enabledBorder: InputBorder.none,
+                  contentPadding: widget.contentPadding,
+                  focusedBorder: InputBorder.none,
+                ),
+              ),
+            )
+          ],
+        ));
   }
 }

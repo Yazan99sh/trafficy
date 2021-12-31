@@ -26,12 +26,10 @@ class CustomNetworkImage extends StatelessWidget {
     var image = imageSource;
 
     if (image.contains('assets/')) {
-
       if (image == '') {
         image = ImageAsset.PLACEHOLDER;
       }
       asset = true;
-
     }
 
     if (asset) {

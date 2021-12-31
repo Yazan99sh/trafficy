@@ -20,7 +20,7 @@ class CustomLoginFormField extends StatefulWidget {
 
   const CustomLoginFormField(
       {this.height = 50,
-       this.focusNode,
+      this.focusNode,
       this.contentPadding = const EdgeInsets.fromLTRB(16, 0, 16, 0),
       this.hintText,
       this.preIcon,
@@ -103,7 +103,9 @@ class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
               Hider(
                   active: widget.password,
                   child: IconButton(
-                      color:widget.focusNode?.hasPrimaryFocus == true ? Theme.of(context).primaryColor : Theme.of(context).disabledColor.withOpacity(0.2),
+                      color: widget.focusNode?.hasPrimaryFocus == true
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).disabledColor.withOpacity(0.2),
                       onPressed: () {
                         if (showPassword) {
                           showPassword = false;

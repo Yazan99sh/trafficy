@@ -30,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomTwaslnaAppBar.appBar(context,
+      appBar: Trafficy.appBar(context,
           title: S.of(context).settings,
           colorIcon: Theme.of(context).brightness != Brightness.dark
               ? Theme.of(context).disabledColor
@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
         child: ListView(
           physics:
-          BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
             Container(
               height: 16,
@@ -107,10 +107,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       onTap: () {
                         widget._authService.logout().then((value) {
-                        
                           // Navigator.of(context).pushNamedAndRemoveUntil(
                           //     MainRoutes.MAIN_SCREEN, (route) => false);
-                        
                         });
                       },
                     ),

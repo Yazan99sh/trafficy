@@ -7,7 +7,9 @@ class MapClientOrder extends StatefulWidget {
   final Function(LatLng) onTap;
   final LatLng? myPos;
   final LatLng? defaultPoint;
-  MapClientOrder(this._mapController, {Key? key,required this.onTap ,this.myPos,this.defaultPoint}) : super(key:key);
+  MapClientOrder(this._mapController,
+      {Key? key, required this.onTap, this.myPos, this.defaultPoint})
+      : super(key: key);
 
   @override
   _MapClientOrderState createState() => _MapClientOrderState();
@@ -18,7 +20,7 @@ class _MapClientOrderState extends State<MapClientOrder> {
 
   @override
   void initState() {
-    if (widget.defaultPoint != null){
+    if (widget.defaultPoint != null) {
       clientAddress = widget.defaultPoint;
     }
     widget._mapController.mapEventStream.listen((event) {
@@ -52,14 +54,14 @@ class _MapClientOrderState extends State<MapClientOrder> {
         },
       ),
       layers: [
-      TileLayerOptions(
-      urlTemplate: 'https://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
-      subdomains: ['a', 'b', 'c'],
-    ),
-    MarkerLayerOptions(
-    markers: clientAddress == null ? [] : _getMarkers(context),
-    ),
-    ],
+        TileLayerOptions(
+          urlTemplate: 'https://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+          subdomains: ['a', 'b', 'c'],
+        ),
+        MarkerLayerOptions(
+          markers: clientAddress == null ? [] : _getMarkers(context),
+        ),
+      ],
     );
   }
 

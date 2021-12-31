@@ -59,7 +59,7 @@ class RegisterScreenState extends State<RegisterScreen> {
       onWillPop: () async {
         // await Navigator.of(context)
         //     .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
-        
+
         return returnToMainScreen == null;
       },
       child: GestureDetector(
@@ -70,13 +70,12 @@ class RegisterScreenState extends State<RegisterScreen> {
           }
         },
         child: Scaffold(
-          appBar: CustomTwaslnaAppBar.appBar(context,
+          appBar: Trafficy.appBar(context,
               title: S.of(context).register,
               onTap: returnToMainScreen != null
                   ? () {
                       // Navigator.of(context).pushNamedAndRemoveUntil(
                       //     MainRoutes.MAIN_SCREEN, (route) => false);
-                    
                     }
                   : null),
           body: loadingSnapshot.connectionState != ConnectionState.waiting
@@ -108,13 +107,13 @@ class RegisterScreenState extends State<RegisterScreen> {
       // Navigator.of(context).pushNamedAndRemoveUntil(
       //     MainRoutes.MAIN_SCREEN, (route) => false,
       //     arguments: returnToMainScreen);
-    
+
     } else if (returnToPreviousScreen != null) {
       Navigator.of(context).pop();
     } else {
       // Navigator.of(context)
       //     .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
-    
+
     }
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)

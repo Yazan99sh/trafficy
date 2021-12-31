@@ -17,17 +17,15 @@ class ChatRepository {
     //     .collection('messages')
     //     .orderBy('sentDate', descending: false)
     //     .snapshots(includeMetadataChanges: false);
-    return 0 ;
+    return 0;
   }
 
   void sendMessage(String chatRoomID, ChatModel chatMessage) {
-  
     // _firestore
     //     .collection('chat_rooms')
     //     .doc(chatRoomID)
     //     .collection('messages')
     //     .add(chatMessage.toJson());
-  
   }
 
   Future<void> sendNotification(String chatRoomID) async {

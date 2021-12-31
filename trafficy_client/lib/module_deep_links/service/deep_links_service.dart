@@ -1,4 +1,3 @@
-
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:uni_links/uni_links.dart';

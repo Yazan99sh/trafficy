@@ -31,8 +31,7 @@ class LoadingChatPage extends StatelessWidget {
         }
       },
       child: Scaffold(
-          appBar:
-              CustomTwaslnaAppBar.appBar(context, title: S.current.chatRoom),
+          appBar: Trafficy.appBar(context, title: S.current.chatRoom),
           body: Stack(
             children: [
               Column(

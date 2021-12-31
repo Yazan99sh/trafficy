@@ -2,7 +2,7 @@ class ChatModel {
   String? sender;
   var sentDate;
   String? msg;
-  
+
   ChatModel({this.sentDate, this.sender, this.msg});
 
   ChatModel.fromJson(Map<String, dynamic> jsonData) {
@@ -16,7 +16,8 @@ class ChatModel {
       try {
         sentDate = DateTime.parse(jsonData['sentDate']);
       } catch (e) {
-        sentDate = DateTime.fromMillisecondsSinceEpoch(int.tryParse(jsonData['sentDate'])! * 1000);
+        sentDate = DateTime.fromMillisecondsSinceEpoch(
+            int.tryParse(jsonData['sentDate'])! * 1000);
       }
     }
     if (jsonData['sentDate'] is int) {

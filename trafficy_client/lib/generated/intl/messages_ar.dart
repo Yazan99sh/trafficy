@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branch": MessageLookupByLibrary.simpleMessage("الفرع التجاري"),
         "branch01": MessageLookupByLibrary.simpleMessage("الفرع 01"),
         "businessName": MessageLookupByLibrary.simpleMessage("الاسم التجاري"),
+        "calibration": MessageLookupByLibrary.simpleMessage("المعايرة"),
+        "calibrationHint": MessageLookupByLibrary.simpleMessage(
+            "في حال تواجدك في المنزل الرجاء بتزويدنا بموقعك بهدف تحسين خدماتنا"),
         "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cancelled": MessageLookupByLibrary.simpleMessage("ملغى"),
         "cancelledHint": MessageLookupByLibrary.simpleMessage(
@@ -345,9 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("من فضلك أملئ الحقل"),
         "pleaseCompleteTheForm":
             MessageLookupByLibrary.simpleMessage("الرجاء أكمال الفورم"),
-        "pleaseDownloadtrafficy_client":
-            MessageLookupByLibrary.simpleMessage(
-                "الرجاء تحميل trafficy_client"),
+        "pleaseDownloadtrafficy_client": MessageLookupByLibrary.simpleMessage(
+            "الرجاء تحميل trafficy_client"),
         "pleaseEnterYourEmail": MessageLookupByLibrary.simpleMessage(
             "الرجاء ادخال البريد الالكتروني"),
         "pleaseInputPhoneNumber":
@@ -550,8 +552,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اهلا في قسم الطلبات"),
         "welcomeToOurApp":
             MessageLookupByLibrary.simpleMessage("أهلا بك في تطبيق تواصلنا"),
-        "welcomeTotrafficy_client": MessageLookupByLibrary.simpleMessage(
-            "اهلا بك في trafficy_client"),
+        "welcomeTotrafficy_client":
+            MessageLookupByLibrary.simpleMessage("اهلا بك في trafficy_client"),
         "whatsappWithCaptain": MessageLookupByLibrary.simpleMessage("الكابتن"),
         "whatsappWithClient": MessageLookupByLibrary.simpleMessage("الزبون"),
         "whatsappWithStoreOwner":

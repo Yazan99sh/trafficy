@@ -86,7 +86,7 @@ class AuthButtons extends StatelessWidget {
                     child: Text(
                       secondButtonTitle,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,
                           color: Theme.of(context).textTheme.bodyText1?.color),
                     ),
                   )),

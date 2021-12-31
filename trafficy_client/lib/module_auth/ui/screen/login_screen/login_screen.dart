@@ -7,6 +7,7 @@ import 'package:trafficy_client/module_auth/state_manager/login_state_manager/lo
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state.dart';
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state_init.dart';
 import 'package:flutter/material.dart';
+import 'package:trafficy_client/module_home/home_routes.dart';
 import 'package:trafficy_client/module_splash/splash_routes.dart';
 import 'package:trafficy_client/utils/components/custom_app_bar.dart';
 import 'package:trafficy_client/utils/helpers/custom_flushbar.dart';
@@ -62,7 +63,7 @@ class LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-        appBar: CustomTwaslnaAppBar.appBar(context,
+        appBar: Trafficy.appBar(context,
             title: S.of(context).login, canGoBack: false),
         body: loadingSnapshot.connectionState != ConnectionState.waiting
             ? _currentStates.getUI(context)
@@ -90,8 +91,8 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    Navigator.of(context)
-        .pushNamedAndRemoveUntil(SplashRoutes.SPLASH_SCREEN, (route) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        HomeRoutes.CALIBRATION_SCREEN, (route) => false);
 
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)

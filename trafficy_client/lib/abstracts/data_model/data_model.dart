@@ -1,14 +1,11 @@
 class DataModel {
-
-
   bool _empty = false;
 
   String? _error;
 
-
   DataModel();
 
-  DataModel.empty(){
+  DataModel.empty() {
     _empty = true;
   }
 
@@ -16,10 +13,9 @@ class DataModel {
 
   DataModel.withData();
 
-  bool  get hasError => _error != null ;
+  bool get hasError => _error != null;
 
   String? get error => _error;
 
   bool get isEmpty => _empty;
-
 }

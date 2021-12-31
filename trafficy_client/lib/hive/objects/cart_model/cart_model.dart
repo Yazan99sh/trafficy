@@ -23,11 +23,11 @@ class CartModel extends HiveObject {
       this.name});
 
   CartModel.fromJson(dynamic json) {
-          id = json['id'];
-          quantity = json['quantity'];
-          price =  json['price'];
-          name =  json['name'];
-          image = json['image'];
+    id = json['id'];
+    quantity = json['quantity'];
+    price = json['price'];
+    name = json['name'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson(CartModel carts) {

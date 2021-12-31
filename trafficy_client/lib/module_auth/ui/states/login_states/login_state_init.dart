@@ -19,6 +19,8 @@ class LoginStateInit extends LoginState {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
+  var focus = FocusNode();
+  var focus2 = FocusNode();
   @override
   Widget getUI(BuildContext context) {
     return Form(
@@ -40,8 +42,7 @@ class LoginStateInit extends LoginState {
                     )
                   : Container(),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: 85, right: 85, top: 8),
+                padding: const EdgeInsets.only(left: 85, right: 85, top: 8),
                 child: Text(
                   S.of(context).username,
                   style: const TextStyle(fontWeight: FontWeight.bold),
@@ -64,19 +65,17 @@ class LoginStateInit extends LoginState {
                 title: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomLoginFormField(
+                    focusNode: focus,
                     controller: usernameController,
                     hintText: S.of(context).registerHint,
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                   left: 85, right: 85, top: 8),
+                padding: const EdgeInsets.only(left: 85, right: 85, top: 8),
                 child: Text(
                   S.of(context).password,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
@@ -85,9 +84,12 @@ class LoginStateInit extends LoginState {
                     borderRadius: BorderRadius.circular(25),
                     color: Theme.of(context).backgroundColor,
                   ),
-                  child:  Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.lock,color: Theme.of(context).primaryColor,),
+                    child: Icon(
+                      Icons.lock,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
                 title: Padding(
@@ -96,7 +98,7 @@ class LoginStateInit extends LoginState {
                     last: true,
                     controller: passwordController,
                     password: true,
-                    focusNode: FocusNode(),
+                    focusNode: focus2,
                     hintText: S.of(context).password,
                   ),
                 ),

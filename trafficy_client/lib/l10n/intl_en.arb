@@ -369,7 +369,10 @@
   "productRated": "Product Rated",
   "rateProductMessage":"Please rate this product",
   "rateProduct":"Rate Product",
-  "cart":"Cart"
+  "cart":"Cart",
+  "calibration":"Calibration",
+  "calibrationHint":"If you are in home please confirm our calibration of your current location for helping us to improve our services"
+
 
 
 

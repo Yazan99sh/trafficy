@@ -14,8 +14,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 class RegisterStateInit extends RegisterState {
   RegisterScreenState screenState;
-  RegisterStateInit(this.screenState,
-      {String? error, bool registered = false})
+  RegisterStateInit(this.screenState, {String? error, bool registered = false})
       : super(screenState) {
     if (error != null) {
       if (registered) {
@@ -30,7 +29,6 @@ class RegisterStateInit extends RegisterState {
           ..show(screenState.context);
       }
     }
-
   }
 
   TextEditingController nameController = TextEditingController();
@@ -160,7 +158,7 @@ class RegisterStateInit extends RegisterState {
           ),
         ),
         Hider(
-          active:MediaQuery.of(context).viewInsets.bottom == 0 ,
+          active: MediaQuery.of(context).viewInsets.bottom == 0,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: AuthButtons(

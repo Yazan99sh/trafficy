@@ -3739,6 +3739,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Calibration`
+  String get calibration {
+    return Intl.message(
+      'Calibration',
+      name: 'calibration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you are in home please confirm our calibration of your current location for helping us to improve our services`
+  String get calibrationHint {
+    return Intl.message(
+      'If you are in home please confirm our calibration of your current location for helping us to improve our services',
+      name: 'calibrationHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

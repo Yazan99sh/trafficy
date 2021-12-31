@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "branch": MessageLookupByLibrary.simpleMessage("Branch"),
         "branch01": MessageLookupByLibrary.simpleMessage("Branch 01"),
         "businessName": MessageLookupByLibrary.simpleMessage("Business Name"),
+        "calibration": MessageLookupByLibrary.simpleMessage("Calibration"),
+        "calibrationHint": MessageLookupByLibrary.simpleMessage(
+            "If you are in home please confirm our calibration of your current location for helping us to improve our services"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
         "cancelledHint": MessageLookupByLibrary.simpleMessage(
@@ -353,9 +356,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please fill the field"),
         "pleaseCompleteTheForm":
             MessageLookupByLibrary.simpleMessage("Please Complete the Form"),
-        "pleaseDownloadtrafficy_client":
-            MessageLookupByLibrary.simpleMessage(
-                "Please Download trafficy_client"),
+        "pleaseDownloadtrafficy_client": MessageLookupByLibrary.simpleMessage(
+            "Please Download trafficy_client"),
         "pleaseEnterYourEmail":
             MessageLookupByLibrary.simpleMessage("Please Enter Your Email"),
         "pleaseInputPhoneNumber":
@@ -555,8 +557,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Welcome to Orders Screen"),
         "welcomeToOurApp":
             MessageLookupByLibrary.simpleMessage("WELCOME TO TWASLNA APP"),
-        "welcomeTotrafficy_client": MessageLookupByLibrary.simpleMessage(
-            "Welcome to trafficy_client"),
+        "welcomeTotrafficy_client":
+            MessageLookupByLibrary.simpleMessage("Welcome to trafficy_client"),
         "whatsappWithCaptain": MessageLookupByLibrary.simpleMessage("Captain"),
         "whatsappWithClient": MessageLookupByLibrary.simpleMessage("Client"),
         "whatsappWithStoreOwner":

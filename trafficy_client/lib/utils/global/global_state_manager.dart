@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+
 @singleton
 @injectable
 class GlobalStateManager {

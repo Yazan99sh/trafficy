@@ -4,19 +4,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @injectable
 class ThemePreferencesHelper {
-
   var preferences = Hive.box('Theme');
 
-
-  void setDarkMode()  {
-     preferences.put('dark', true);
+  void setDarkMode() {
+    preferences.put('dark', true);
   }
 
   void setDayMode() {
-     preferences.put('dark', false);
+    preferences.put('dark', false);
   }
 
-  bool isDarkMode(){
+  bool isDarkMode() {
     bool? dark = preferences.get('dark') ?? false;
     return dark == true;
   }

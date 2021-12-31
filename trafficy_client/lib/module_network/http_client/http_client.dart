@@ -25,9 +25,7 @@ class ApiClient {
         receiveTimeout: 60000,
         connectTimeout: 60000,
       ));
-      if (!kIsWeb) {
-      
-      }
+      if (!kIsWeb) {}
       if (headers != null) {
         if (headers['Authorization'] != null) {
           _logger.info(tag, 'Adding Auth Header');
@@ -81,8 +79,7 @@ class ApiClient {
         }
       }
       //  client.options.headers['Access-Control-Allow-Origin'] = '*';
-      if (!kIsWeb) {
-      }
+      if (!kIsWeb) {}
       var response = await client.post(
         url,
         queryParameters: queryParams,
@@ -131,8 +128,7 @@ class ApiClient {
         }
       }
       //  client.options.headers['Access-Control-Allow-Origin'] = '*';
-      if (!kIsWeb) {
-      }
+      if (!kIsWeb) {}
       var response = await client.put(
         url,
         queryParameters: queryParams,
@@ -173,8 +169,7 @@ class ApiClient {
         receiveTimeout: 60000,
         connectTimeout: 60000,
       ));
-      if (!kIsWeb) {
-      }
+      if (!kIsWeb) {}
       if (headers != null) {
         if (headers['Authorization'] != null) {
           _logger.info(tag, 'Adding Auth Header');

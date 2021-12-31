@@ -11,13 +11,17 @@ class EmptyState extends States {
   final String title;
   final bool hasAppbar;
   final VoidCallback onPressed;
-  EmptyState(this.screenState,{required this.emptyMessage,required this.title,this.hasAppbar = true,required this.onPressed})
+  EmptyState(this.screenState,
+      {required this.emptyMessage,
+      required this.title,
+      this.hasAppbar = true,
+      required this.onPressed})
       : super(screenState);
 
   @override
   Widget getUI(BuildContext context) {
     return Scaffold(
-      appBar:hasAppbar ? CustomTwaslnaAppBar.appBar(context, title: title) : null,
+      appBar: hasAppbar ? Trafficy.appBar(context, title: title) : null,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         child: Flex(
@@ -45,7 +49,7 @@ class EmptyState extends States {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         elevation: 0),
-                    onPressed:onPressed ,
+                    onPressed: onPressed,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
