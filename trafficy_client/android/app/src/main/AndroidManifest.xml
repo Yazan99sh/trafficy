@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.trafficy_client">
   <application android:label="trafficy_client" android:icon="@mipmap/ic_launcher">
+      <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDN34b6trEaUMMXrj2sJ2ijUa-N-lGWUBE"/>
     <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
   
       <!-- Specifies an Android theme to apply to this Activity as soon as
