@@ -84,6 +84,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       timeago.setDefaultLocale(event);
       Moment.setLocaleGlobally(event == 'en' ? LocaleEn() : LocaleAr());
       lang = event;
+      activeTheme = widget._themeDataService.getActiveTheme();
       setState(() {});
     });
     widget._themeDataService.darkModeStream.listen((event) {

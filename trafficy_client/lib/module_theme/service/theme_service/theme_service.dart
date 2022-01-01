@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:trafficy_client/di/di_config.dart';
+import 'package:trafficy_client/module_localization/service/localization_service/localization_service.dart';
 import 'package:trafficy_client/module_theme/pressistance/theme_preferences_helper.dart';
 
 @injectable
@@ -35,10 +37,12 @@ class AppThemeDataService {
         primaryColor: primaryColor,
         primaryColorDark: primaryDarker,
         focusColor: primaryColor,
-        cardColor: Colors.grey[150],
-        fontFamily: GoogleFonts.ubuntu().fontFamily,
+        fontFamily: getIt<LocalizationService>().getLanguage() == 'ar'
+            ? GoogleFonts.balooBhai().fontFamily
+            : GoogleFonts.ubuntu().fontFamily,
+        backgroundColor: const Color.fromRGBO(36, 34, 38, 1),
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: accentColor),
+            .copyWith(secondary: accentColor, brightness: Brightness.dark),
       );
     }
     return ThemeData(
@@ -49,7 +53,9 @@ class AppThemeDataService {
         cardColor: const Color.fromRGBO(245, 245, 245, 1),
         // const Color.fromRGBO(236, 239, 241, 1)
         backgroundColor: const Color.fromRGBO(246, 235, 255, 1),
-        fontFamily: GoogleFonts.ubuntu().fontFamily,
+        fontFamily: getIt<LocalizationService>().getLanguage() == 'ar'
+            ? GoogleFonts.balooBhai().fontFamily
+            : GoogleFonts.ubuntu().fontFamily,
         iconTheme: const IconThemeData(
           color: Color.fromRGBO(246, 235, 255, 1),
         ),
