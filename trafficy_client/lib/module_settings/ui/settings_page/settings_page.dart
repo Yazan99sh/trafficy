@@ -1,8 +1,11 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:injectable/injectable.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:trafficy_client/generated/l10n.dart';
+import 'package:trafficy_client/module_auth/authorization_routes.dart';
 import 'package:trafficy_client/module_auth/service/auth_service/auth_service.dart';
+import 'package:trafficy_client/module_home/home_routes.dart';
 import 'package:trafficy_client/module_localization/service/localization_service/localization_service.dart';
 import 'package:trafficy_client/module_theme/service/theme_service/theme_service.dart';
 import 'package:trafficy_client/utils/components/custom_app_bar.dart';
@@ -32,29 +35,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: Trafficy.appBar(context,
           title: S.of(context).settings,
-          colorIcon: Theme.of(context).brightness != Brightness.dark
-              ? Theme.of(context).disabledColor
-              : Colors.white,
           buttonBackground: Theme.of(context).backgroundColor),
       body: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
         child: ListView(
           physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
             Container(
               height: 16,
             ),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(25),
                 color: Theme.of(context).backgroundColor,
               ),
               child: Flex(
                 direction: Axis.vertical,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   ListTileSwitch(
@@ -72,22 +72,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Text(S.of(context).darkMode),
                   ),
                   ListTile(
-                    leading: Icon(Icons.language),
+                    leading: const Icon(Icons.language),
                     title: Text(S.of(context).language),
                     trailing: DropdownButton(
                         value: Localizations.localeOf(context).languageCode,
                         underline: Container(),
-                        icon: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                        icon: const Padding(
+                          padding: EdgeInsets.all(4.0),
                           child: Icon(Icons.arrow_drop_down_rounded),
                         ),
                         items: [
-                          DropdownMenuItem(
-                            child: Text('العربية'),
+                           DropdownMenuItem(
+                            child: Text('العربية', style: TextStyle(
+                              fontFamily: GoogleFonts.balooBhai().fontFamily
+                            ),),
                             value: 'ar',
                           ),
-                          DropdownMenuItem(
-                            child: Text('English'),
+                           DropdownMenuItem(
+                            child: Text('English',
+                            style: TextStyle(
+                              fontFamily: GoogleFonts.ubuntu().fontFamily
+                            ),
+                            ),
                             value: 'en',
                           ),
                         ],
@@ -96,24 +102,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .setLanguage(newLang.toString());
                         }),
                   ),
+                   ListTile(
+                     leading: const Icon(Icons.person_rounded),
+                     title: Text(S.of(context).calibration),
+                     trailing: const Padding(
+                       padding: EdgeInsets.only(right: 10.0, left: 10.0),
+                       child: Icon(Icons.location_on_rounded),
+                     ),
+                     onTap: () {
+                         Navigator.of(context).pushNamedAndRemoveUntil(
+                             HomeRoutes.CALIBRATION_SCREEN, (route) => false);  
+                     },
+                   ),
                   Hider(
                     active: widget._authService.isLoggedIn,
                     child: ListTile(
-                      leading: Icon(Icons.person_rounded),
+                      leading: const Icon(Icons.person_rounded),
                       title: Text(S.of(context).signOut),
-                      trailing: Padding(
-                        padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                      trailing: const Padding(
+                        padding: EdgeInsets.only(right: 10.0, left: 10.0),
                         child: Icon(Icons.logout_rounded),
                       ),
                       onTap: () {
                         widget._authService.logout().then((value) {
-                          // Navigator.of(context).pushNamedAndRemoveUntil(
-                          //     MainRoutes.MAIN_SCREEN, (route) => false);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              AuthorizationRoutes.LOGIN_SCREEN, (route) => false);
                         });
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                 ],
