@@ -40,24 +40,26 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         initDistance = S.current.unknown;
       }
-      if (mounted) {
-        setState(() {});
-      }
+      setState(() {});
     });
     var options = const LocationSettings(
         accuracy: LocationAccuracy.high, distanceFilter: 10);
     Geolocator.getPositionStream(locationSettings: options).listen((position) {
-      var speedInMps = position.speed; // this is your speed
-      speedInKm = speedInMps / 1000;
+      var speedInMps = position.speed;
+      speedInKm = speedInMps * (18/5);
       var straightDistance = distance.as(
           lat.LengthUnit.Kilometer,
           lat.LatLng(position.latitude, position.longitude),
           defaultUniversityLocation);
-      timeToArrival = ((straightDistance / (speedInKm)) / 60).toString();
-      if (timeToArrival == 'Infinity') timeToArrival = null;
-      if (mounted) {
-        setState(() {});
+      var time = (straightDistance / (speedInMps/1000)) / 60;
+      if (time >= 60) {
+        timeToArrival = (time / 60).toStringAsFixed(2) + ' ' + S.current.hour;
+      } else {
+        timeToArrival = time.toStringAsFixed(2) + ' ' + S.current.minute;
       }
+      if (timeToArrival == 'Infinity') timeToArrival = null;
+      if (speedInKm <= 0.01) timeToArrival = null;
+      setState(() {});
     });
   }
 
@@ -93,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           // Mentoring Panel
           Hider(
-            active:controller.isCompleted,
+            active: controller.isCompleted,
             child: ScalingWidget(
               child: Align(
                   alignment: Alignment.bottomCenter,
@@ -115,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.only(right: 30.0, left: 30),
+                                  const EdgeInsets.only(right: 25.0, left: 25),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -128,8 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   Text(
                                     timeToArrival != null
-                                        ? '$timeToArrival m'
-                                        : '$initDistance km',
+                                        ? '$timeToArrival'
+                                        : '$initDistance ${S.current.km}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
@@ -152,8 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 var myLocation =
                                     await DeepLinksService.defaultLocation();
                                 if (myLocation != null) {
-                                  LatLng latLng = LatLng(
-                                      myLocation.latitude, myLocation.longitude);
+                                  LatLng latLng = LatLng(myLocation.latitude,
+                                      myLocation.longitude);
                                   GoogleMapController con =
                                       await controller.future;
                                   await con.animateCamera(
@@ -180,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Padding(
                               padding:
-                                  const EdgeInsets.only(right: 30.0, left: 30),
+                                  const EdgeInsets.only(right: 25.0, left: 25),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -192,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 8,
                                   ),
                                   Text(
-                                    '$speedInKm km/s',
+                                    '${speedInKm.toStringAsFixed(2)} ${S.current.kmh}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
