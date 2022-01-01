@@ -180,7 +180,7 @@
   "howWeWork": "How we work",
   "took": "Took",
   "minutes": "minutes",
-  "minute": "minute",
+  "minute": "m",
   "iAgreeToTheTermsOsService": "I Agree to the Terms os service.",
   "iAgreeToTheTermsOfServicePrivacyPolicy": "I Agree To The Terms Of Service & privacy policy",
   "businessName":"Business Name",
@@ -211,7 +211,7 @@
   "days":"days",
   "second":"second",
   "seconds":"seconds",
-  "hour":"hour",
+  "hour":"h",
   "hours":"hours",
   "failureRenew":"Your renew has been failed please try again",
   "store":"Store",
@@ -371,8 +371,9 @@
   "rateProduct":"Rate Product",
   "cart":"Cart",
   "calibration":"Calibration",
-  "calibrationHint":"If you are in home please confirm our calibration of your current location for helping us to improve our services"
-
+  "calibrationHint":"If you are in home please confirm our calibration of your current location for helping us to improve our services",
+  "km":"Km",
+  "kms":"km/s"
 
 
 
