@@ -1,7 +1,10 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:injectable/injectable.dart';
+import 'package:trafficy_client/app_write_api.dart';
+import 'package:trafficy_client/app_write_api.dart';
 import 'package:trafficy_client/consts/urls.dart';
+import 'package:trafficy_client/di/di_config.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_auth/enums/auth_status.dart';
 import 'package:trafficy_client/module_auth/exceptions/auth_exception.dart';
@@ -32,13 +35,7 @@ class AuthService {
   String get username => _prefsHelper.getUsername() ?? '';
 
   Future<void> loginApi(String username, String password) async {
-    Client client = Client();
-    client
-        .setEndpoint(Urls.APPWRITE_ENDPOINT)
-        .setProject(Urls.APPWRITE_PROJECTID);
-
-    Account account = Account(client);
-    account.deleteSessions();
+    var account = await getIt<AppwriteApi>().getAccount();
     Logger().info('Login ==>', 'Username => $username');
     Logger().info('Login ==>', 'Password => $password');
     // AppwriteException
@@ -108,6 +105,8 @@ class AuthService {
   }
 
   Future<void> logout() async {
+    var account = await getIt<AppwriteApi>().getAccount();
+    account.deleteSessions();
     await _prefsHelper.cleanAll();
   }
 }
