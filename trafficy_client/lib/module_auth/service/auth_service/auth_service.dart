@@ -51,6 +51,8 @@ class AuthService {
     } catch (e) {
       e as AppwriteException;
       Logger().info('Login Response => ', e.response.toString());
+      Logger().info('Login Code => ', e.code.toString());
+      Logger().info('Login Message => ', e.message.toString());
       String error = StatusCodeHelper.getStatusCodeMessages(e.code.toString());
       _authSubject.addError(error);
       throw AuthorizationException(error);
