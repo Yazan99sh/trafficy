@@ -447,7 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("المشاركة"),
         "showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
         "showingCart": MessageLookupByLibrary.simpleMessage("مشاهدة السلة"),
-        "signOut": MessageLookupByLibrary.simpleMessage("تسحيل الخروج"),
+        "signOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "smallLessThan20Employee":
             MessageLookupByLibrary.simpleMessage("1 - 20 موظف"),
