@@ -11,6 +11,8 @@ import 'package:trafficy_client/module_deep_links/service/deep_links_service.dar
 import 'package:trafficy_client/module_home/home_routes.dart';
 import 'package:trafficy_client/module_settings/setting_routes.dart';
 import 'package:trafficy_client/utils/components/custom_app_bar.dart';
+import 'package:trafficy_client/utils/effect/hidder.dart';
+import 'package:trafficy_client/utils/effect/scaling.dart';
 
 @injectable
 class HomeScreen extends StatefulWidget {
@@ -38,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         initDistance = S.current.unknown;
       }
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     var options = const LocationSettings(
         accuracy: LocationAccuracy.high, distanceFilter: 10);
@@ -51,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
           defaultUniversityLocation);
       timeToArrival = ((straightDistance / (speedInKm)) / 60).toString();
       if (timeToArrival == 'Infinity') timeToArrival = null;
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
   }
 
@@ -70,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ]),
       body: Stack(
         children: [
+          // Google Map
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
             child: GoogleMap(
@@ -84,114 +91,124 @@ class _HomeScreenState extends State<HomeScreen> {
                 initialCameraPosition: const CameraPosition(
                     target: LatLng(36.747061, 36.1618916))),
           ),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  constraints: const BoxConstraints(
-                    maxHeight: 100,
-                  ),
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
+          // Mentoring Panel
+          Hider(
+            active:controller.isCompleted,
+            child: ScalingWidget(
+              child: Align(
+                  alignment: Alignment.bottomCenter,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30.0, left: 30),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.university,
-                                color: Theme.of(context).primaryColor,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 100,
+                      ),
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 30.0, left: 30),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.university,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    timeToArrival != null
+                                        ? '$timeToArrival m'
+                                        : '$initDistance km',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.7)),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                timeToArrival != null
-                                    ? '$timeToArrival m'
-                                    : '$initDistance km',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.7)),
-                              ),
-                            ],
-                          ),
-                        ),
-                        VerticalDivider(
-                          thickness: 2.5,
-                          indent: 10,
-                          endIndent: 10,
-                          color: Theme.of(context).backgroundColor,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: const CircleBorder()),
-                          onPressed: () async {
-                            var myLocation =
-                                await DeepLinksService.defaultLocation();
-                            if (myLocation != null) {
-                              LatLng latLng = LatLng(
-                                  myLocation.latitude, myLocation.longitude);
-                              GoogleMapController con = await controller.future;
-                              await con.animateCamera(
-                                  CameraUpdate.newCameraPosition(CameraPosition(
-                                zoom: 19,
-                                target: latLng,
-                              )));
-                            }
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(
-                              Icons.location_on_rounded,
-                              color: Colors.white,
                             ),
-                          ),
-                        ),
-                        VerticalDivider(
-                          thickness: 2.5,
-                          indent: 10,
-                          endIndent: 10,
-                          color: Theme.of(context).backgroundColor,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30.0, left: 30),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.weight,
-                                color: Theme.of(context).primaryColor,
+                            VerticalDivider(
+                              thickness: 2.5,
+                              indent: 10,
+                              endIndent: 10,
+                              color: Theme.of(context).backgroundColor,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder()),
+                              onPressed: () async {
+                                var myLocation =
+                                    await DeepLinksService.defaultLocation();
+                                if (myLocation != null) {
+                                  LatLng latLng = LatLng(
+                                      myLocation.latitude, myLocation.longitude);
+                                  GoogleMapController con =
+                                      await controller.future;
+                                  await con.animateCamera(
+                                      CameraUpdate.newCameraPosition(
+                                          CameraPosition(
+                                    zoom: 19,
+                                    target: latLng,
+                                  )));
+                                }
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Icon(
+                                  Icons.location_on_rounded,
+                                  color: Colors.white,
+                                ),
                               ),
-                              const SizedBox(
-                                height: 8,
+                            ),
+                            VerticalDivider(
+                              thickness: 2.5,
+                              indent: 10,
+                              endIndent: 10,
+                              color: Theme.of(context).backgroundColor,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 30.0, left: 30),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.weight,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    '$speedInKm km/s',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.7)),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '$speedInKm km/s',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.7)),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              )),
+                  )),
+            ),
+          ),
         ],
       ),
     );
