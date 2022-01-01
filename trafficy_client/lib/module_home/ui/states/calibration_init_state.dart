@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:trafficy_client/abstracts/states/state.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_deep_links/service/deep_links_service.dart';
+import 'package:trafficy_client/module_home/home_routes.dart';
 import 'package:trafficy_client/module_home/ui/screen/calibration_screen.dart';
 import 'package:trafficy_client/utils/effect/scaling.dart';
 import 'package:trafficy_client/utils/images/images.dart';
@@ -108,7 +109,10 @@ class CalibrationInitState extends States {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(25))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      HomeRoutes.HOME_SCREEN, (route) => false);
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(S.current.skip),

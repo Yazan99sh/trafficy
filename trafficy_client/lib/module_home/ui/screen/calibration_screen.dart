@@ -42,7 +42,7 @@ class CalibrationScreenState extends State<CalibrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Trafficy.appBar(context, title: S.current.calibration),
+      appBar: Trafficy.appBar(context, title: S.current.calibration,canGoBack: false),
       body: currentState.getUI(context),
     );
   }
