@@ -1850,10 +1850,10 @@ class S {
     );
   }
 
-  /// `minute`
+  /// `m`
   String get minute {
     return Intl.message(
-      'minute',
+      'm',
       name: 'minute',
       desc: '',
       args: [],
@@ -2160,10 +2160,10 @@ class S {
     );
   }
 
-  /// `hour`
+  /// `h`
   String get hour {
     return Intl.message(
-      'hour',
+      'h',
       name: 'hour',
       desc: '',
       args: [],
@@ -3755,6 +3755,26 @@ class S {
     return Intl.message(
       'If you are in home please confirm our calibration of your current location for helping us to improve our services',
       name: 'calibrationHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Km`
+  String get km {
+    return Intl.message(
+      'Km',
+      name: 'km',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `km/s`
+  String get kms {
+    return Intl.message(
+      'km/s',
+      name: 'kms',
       desc: '',
       args: [],
     );

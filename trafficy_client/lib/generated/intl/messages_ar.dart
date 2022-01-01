@@ -201,7 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeDataEmpty":
             MessageLookupByLibrary.simpleMessage("لايوجد بيانات حاليا لعرضها"),
         "hour": MessageLookupByLibrary.simpleMessage("ساعة"),
-        "hours": MessageLookupByLibrary.simpleMessage("ساعات"),
+        "hours": MessageLookupByLibrary.simpleMessage("س"),
         "howWeWork": MessageLookupByLibrary.simpleMessage("كيف يعمل التطبيق"),
         "iAgreeToTheTermsOfServicePrivacyPolicy":
             MessageLookupByLibrary.simpleMessage(
@@ -227,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "invoiceCost": MessageLookupByLibrary.simpleMessage("تكلفة الفاتورة"),
         "invoiceImage": MessageLookupByLibrary.simpleMessage("صورة الفاتورة"),
         "item": MessageLookupByLibrary.simpleMessage("عنصر"),
+        "km": MessageLookupByLibrary.simpleMessage("كم"),
+        "kms": MessageLookupByLibrary.simpleMessage("كم/ث"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "largeMoreThan100Employees":
             MessageLookupByLibrary.simpleMessage("+100 موظف"),
@@ -243,7 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "me": MessageLookupByLibrary.simpleMessage("مهنتي"),
         "mediumMoreThan20EmployeesLessThan100":
             MessageLookupByLibrary.simpleMessage("21 - 100 موظف"),
-        "minute": MessageLookupByLibrary.simpleMessage("دقيقة"),
+        "minute": MessageLookupByLibrary.simpleMessage("د"),
         "minutes": MessageLookupByLibrary.simpleMessage("دقائق"),
         "mohammad": MessageLookupByLibrary.simpleMessage("محمد"),
         "mostSoldProduct":

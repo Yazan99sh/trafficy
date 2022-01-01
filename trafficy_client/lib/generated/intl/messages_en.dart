@@ -204,7 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "homeDataEmpty": MessageLookupByLibrary.simpleMessage(
             "There is no data to show you yet"),
-        "hour": MessageLookupByLibrary.simpleMessage("hour"),
+        "hour": MessageLookupByLibrary.simpleMessage("h"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "howWeWork": MessageLookupByLibrary.simpleMessage("How we work"),
         "iAgreeToTheTermsOfServicePrivacyPolicy":
@@ -234,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "invoiceCost": MessageLookupByLibrary.simpleMessage("Invoice Cost"),
         "invoiceImage": MessageLookupByLibrary.simpleMessage("Invoice Image"),
         "item": MessageLookupByLibrary.simpleMessage("Item"),
+        "km": MessageLookupByLibrary.simpleMessage("Km"),
+        "kms": MessageLookupByLibrary.simpleMessage("km/s"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "largeMoreThan100Employees":
             MessageLookupByLibrary.simpleMessage("+100 Employees"),
@@ -250,7 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "me": MessageLookupByLibrary.simpleMessage("ME"),
         "mediumMoreThan20EmployeesLessThan100":
             MessageLookupByLibrary.simpleMessage("21 - 100 Employees"),
-        "minute": MessageLookupByLibrary.simpleMessage("minute"),
+        "minute": MessageLookupByLibrary.simpleMessage("m"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "mohammad": MessageLookupByLibrary.simpleMessage("Mohammad"),
         "mostSoldProduct":
