@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trafficy_client/utils/effect/hidder.dart';
 
 class AuthButtons extends StatelessWidget {
   final String firstButtonTitle;
@@ -47,7 +48,7 @@ class AuthButtons extends StatelessWidget {
                     onSurface: Theme.of(context).primaryColor,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
                   child: Center(
@@ -67,29 +68,32 @@ class AuthButtons extends StatelessWidget {
                   )),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-                right: 16.0, left: 16, bottom: 8.0, top: 8.0),
-            child: SizedBox(
-              width: double.maxFinite,
-              height: 50,
-              child: ElevatedButton(
-                  onPressed: secondButtonTab,
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    primary: Theme.of(context).backgroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+          Hider(
+            active:false,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  right: 16.0, left: 16, bottom: 8.0, top: 8.0),
+              child: SizedBox(
+                width: double.maxFinite,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: secondButtonTab,
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      primary: Theme.of(context).backgroundColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                     ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      secondButtonTitle,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).textTheme.bodyText1?.color),
-                    ),
-                  )),
+                    child: Center(
+                      child: Text(
+                        secondButtonTitle,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).textTheme.bodyText1?.color),
+                      ),
+                    )),
+              ),
             ),
           ),
         ],

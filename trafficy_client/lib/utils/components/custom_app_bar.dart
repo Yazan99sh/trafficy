@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Trafficy {
- static double borderRadius = 10;
+ static double borderRadius = 25;
   static PreferredSizeWidget appBar(
     BuildContext context, {
     required title,
