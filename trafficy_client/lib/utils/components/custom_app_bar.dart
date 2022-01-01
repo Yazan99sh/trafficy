@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Trafficy {
+ static double borderRadius = 10;
   static PreferredSizeWidget appBar(
     BuildContext context, {
     required title,
@@ -28,14 +29,14 @@ class Trafficy {
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(borderRadius),
                   onTap: onTap ?? () => Navigator.of(context).pop(),
                   child: Card(
-                    margin: EdgeInsets.all(0),
+                    margin: const EdgeInsets.all(0),
                     color: Theme.of(context).primaryColor,
                     elevation: 7,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(borderRadius),
                     ),
                     child: Center(
                       child: Icon(
@@ -49,6 +50,33 @@ class Trafficy {
             )
           : null,
       elevation: 0,
+    );
+  }
+
+  static Widget action({required IconData icon, required VoidCallback onTap,required BuildContext context}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(borderRadius),
+        onTap: onTap,
+        child: Card(
+          margin: EdgeInsets.zero,
+          color: Theme.of(context).primaryColor,
+          elevation: 7,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                icon,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
