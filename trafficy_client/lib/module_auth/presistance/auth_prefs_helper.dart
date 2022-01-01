@@ -27,6 +27,12 @@ class AuthPrefsHelper {
     box.put('created', created);
   }
 
+  void setCalibrated() {
+    box.put('calibration', true);
+  }
+  bool isCalibrated() {
+    return box.get('calibration') ?? false;
+  }
   bool getUserCreated() {
     return box.get('created') ?? false;
   }

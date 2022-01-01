@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:appwrite/appwrite.dart';
 import 'package:injectable/injectable.dart';
 import 'package:trafficy_client/consts/urls.dart';
+import 'package:trafficy_client/di/di_config.dart';
 import 'package:trafficy_client/generated/l10n.dart';
+import 'package:trafficy_client/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_client/module_auth/state_manager/login_state_manager/login_state_manager.dart';
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state.dart';
 import 'package:trafficy_client/module_auth/ui/states/login_states/login_state_init.dart';
@@ -91,9 +93,13 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        HomeRoutes.CALIBRATION_SCREEN, (route) => false);
-
+    if (getIt<AuthPrefsHelper>().isCalibrated()) {
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(HomeRoutes.HOME_SCREEN, (route) => false);
+    } else {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          HomeRoutes.CALIBRATION_SCREEN, (route) => false);
+    }
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)
         .show(context);
