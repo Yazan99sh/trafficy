@@ -228,7 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invoiceImage": MessageLookupByLibrary.simpleMessage("صورة الفاتورة"),
         "item": MessageLookupByLibrary.simpleMessage("عنصر"),
         "km": MessageLookupByLibrary.simpleMessage("كم"),
-        "kms": MessageLookupByLibrary.simpleMessage("كم/ث"),
+        "kmh": MessageLookupByLibrary.simpleMessage("كم/س"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "largeMoreThan100Employees":
             MessageLookupByLibrary.simpleMessage("+100 موظف"),

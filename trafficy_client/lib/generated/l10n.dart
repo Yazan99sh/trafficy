@@ -3770,11 +3770,11 @@ class S {
     );
   }
 
-  /// `km/s`
-  String get kms {
+  /// `km/h`
+  String get kmh {
     return Intl.message(
-      'km/s',
-      name: 'kms',
+      'km/h',
+      name: 'kmh',
       desc: '',
       args: [],
     );

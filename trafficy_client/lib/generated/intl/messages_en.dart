@@ -235,7 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invoiceImage": MessageLookupByLibrary.simpleMessage("Invoice Image"),
         "item": MessageLookupByLibrary.simpleMessage("Item"),
         "km": MessageLookupByLibrary.simpleMessage("Km"),
-        "kms": MessageLookupByLibrary.simpleMessage("km/s"),
+        "kmh": MessageLookupByLibrary.simpleMessage("km/h"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "largeMoreThan100Employees":
             MessageLookupByLibrary.simpleMessage("+100 Employees"),
