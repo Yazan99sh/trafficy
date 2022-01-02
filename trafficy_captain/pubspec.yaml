@@ -1,0 +1,181 @@
+name: trafficy_captain
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 0.0.1+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  # Custom SnackBar
+  another_flushbar: ^1.10.22
+  #Material
+  animated_bottom_navigation_bar: ^0.3.2
+  # Custom Toast
+  fluttertoast: ^8.0.7
+  # Local Notifications
+  flutter_local_notifications: ^6.0.0
+
+  flutter_localizations:
+    sdk: flutter
+  # Fonts
+  font_awesome_flutter: ^9.0.0
+  google_fonts: ^2.1.0
+  # Camera And Gallery
+  image_picker: ^0.8.0
+  # NoSQL Database
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  hive_generator: ^1.1.1
+  # Open Url On Browser
+  url_launcher: ^6.0.6
+  share: ^2.0.4
+  # Network Agent
+  dio: ^4.0.0
+  # Analyzer
+  analyzer_plugin: ^0.6.0
+  # Time Ago Generator
+  timeago: ^3.0.2
+  simple_moment: ^1.1.1
+  # String Validators
+  validators: ^3.0.0
+  # Svg Loader
+  flutter_svg: ^0.22.0
+  # Stream And RX
+  rxdart: ^0.27.1
+  # Internationalization
+  intl: ^0.17.0
+  intl_utils: ^2.3.0
+  # UUID
+  uuid: ^3.0.4
+  # Geo
+  latlong2: ^0.8.0
+  location: ^4.3.0
+  uni_links: ^0.5.1
+  geolocator: ^8.0.1
+  # Lottie And Flare Animation
+  lottie: ^1.0.1
+  flare_flutter: ^3.0.0
+  # DI
+  injectable: ^1.4.1
+  get_it: ^7.1.3
+  # Maps
+  flutter_map: ^0.13.1
+  google_maps_flutter: ^2.1.1
+
+  # Material
+  list_tile_switch: ^1.0.0
+  dotted_line: ^3.0.0
+  progressive_image: ^2.0.0
+  flutter_advanced_drawer: ^1.2.3
+  flutter_snake_navigationbar: ^0.5.0
+  scroll_to_index: ^2.0.0
+  soundpool: ^2.1.0
+  device_info: ^2.0.2
+  liquid_progress_indicator: ^0.4.0
+  pinch_zoom: ^1.0.0
+  fl_chart: ^0.40.0
+  flutter_rating_bar: ^4.0.0
+  appwrite: ^2.0.3
+
+
+dev_dependencies:
+  # Test Libs
+  flutter_test:
+    sdk: flutter
+  flutter_gherkin: ^2.0.0
+  test: ^1.16.8
+  # Build Runner And DI Generator
+  build_runner: ^2.1.4
+  injectable_generator: ^1.4.1
+  # Flutter Launcher Icons Setup
+  flutter_launcher_icons: ^0.9.0
+  # Flutter Native Splash Screen
+  flutter_native_splash: ^1.1.8+4
+  # Feature Descovery
+  feature_discovery: ^0.14.0
+  # flutter lint 
+  flutter_lints: ^1.0.4
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.jpg"
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/icon/
+    - assets/animations/
+    - assets/sounds/
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+    - family: Custom_icon
+      fonts:
+        - asset: assets/fonts/Custom_icon.ttf
+    - family: MandobIcons
+      fonts:
+        - asset: assets/fonts/MandobIcons.ttf
+
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
+flutter_native_splash:
+  color: "#fafafa"
+  image: assets/images/logo.png
+  color_dark: "#303030"
+  image_dark: assets/images/logo.png
