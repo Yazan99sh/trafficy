@@ -66,7 +66,7 @@ class HomeRepository {
         collectionId: '61d1b52b7af6c',
         data: request.toJson(),
       );
-      _logger.info('create Document for collection ${result.$collection}',
+      _logger.info('update Document for collection ${result.$collection}',
           result.data.toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.data);
     } catch (e) {
