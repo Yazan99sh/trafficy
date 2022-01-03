@@ -42,65 +42,39 @@ class LoginStateInit extends LoginState {
                     )
                   : Container(),
               Padding(
-                padding: const EdgeInsets.only(left: 85, right: 85, top: 8),
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
                 child: Text(
                   S.of(context).username,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).backgroundColor,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.email,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomLoginFormField(
-                    focusNode: focus,
-                    controller: usernameController,
-                    hintText: S.of(context).registerHint,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomLoginFormField(
+                  preIcon: const Icon(Icons.email),
+                  focusNode: focus,
+                  contentPadding: const EdgeInsets.only(top: 15),
+                  controller: usernameController,
+                  hintText: S.of(context).registerHint,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 85, right: 85, top: 8),
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
                 child: Text(
                   S.of(context).password,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-              ListTile(
-                leading: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).backgroundColor,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.lock,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-                title: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomLoginFormField(
-                    last: true,
-                    controller: passwordController,
-                    password: true,
-                    focusNode: focus2,
-                    hintText: S.of(context).password,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomLoginFormField(
+                  preIcon: const Icon(Icons.password),
+                  contentPadding: const EdgeInsets.only(top: 15),
+                  last: true,
+                  controller: passwordController,
+                  password: true,
+                  focusNode: focus2,
+                  hintText: S.of(context).password,
                 ),
               ),
               Container(

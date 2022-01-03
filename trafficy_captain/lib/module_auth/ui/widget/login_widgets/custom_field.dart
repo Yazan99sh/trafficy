@@ -43,7 +43,7 @@ class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: Theme.of(context).backgroundColor,
+        color: Theme.of(context).backgroundColor.withOpacity(0.5),
       ),
       child: Padding(
           padding:
@@ -103,6 +103,7 @@ class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
               Hider(
                   active: widget.password,
                   child: IconButton(
+                    splashRadius: 15,
                       color: widget.focusNode?.hasPrimaryFocus == true
                           ? Theme.of(context).primaryColor
                           : Theme.of(context).disabledColor.withOpacity(0.2),
