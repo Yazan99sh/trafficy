@@ -20,5 +20,6 @@ class HiveSetUp {
     await Hive.openBox('Order');
     await Hive.openBox('Chat');
     await Hive.openBox('Notification');
+    await Hive.openBox('Home');
   }
 }
