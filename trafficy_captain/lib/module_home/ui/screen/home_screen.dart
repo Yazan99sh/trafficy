@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart' as lat;
 import 'package:trafficy_captain/generated/l10n.dart';
 import 'package:trafficy_captain/module_deep_links/service/deep_links_service.dart';
-import 'package:trafficy_captain/module_home/home_routes.dart';
 import 'package:trafficy_captain/module_settings/setting_routes.dart';
 import 'package:trafficy_captain/utils/components/custom_app_bar.dart';
 import 'package:trafficy_captain/utils/effect/hidder.dart';
@@ -20,16 +18,20 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Completer<GoogleMapController> controller = Completer();
   double speedInKm = 0.0;
   lat.LatLng defaultUniversityLocation = lat.LatLng(35.0170831, 36.7598127);
   final lat.Distance distance = const lat.Distance();
   String? timeToArrival;
   String initDistance = '';
+  late AnimationController animationController;
   @override
   void initState() {
     super.initState();
+    animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+
     DeepLinksService.defaultLocation().then((value) {
       if (value != null) {
         var straightDistance = distance.as(
@@ -46,12 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
         accuracy: LocationAccuracy.high, distanceFilter: 10);
     Geolocator.getPositionStream(locationSettings: options).listen((position) {
       var speedInMps = position.speed;
-      speedInKm = speedInMps * (18/5);
+      speedInKm = speedInMps * (18 / 5);
       var straightDistance = distance.as(
           lat.LengthUnit.Kilometer,
           lat.LatLng(position.latitude, position.longitude),
           defaultUniversityLocation);
-      var time = (straightDistance / (speedInMps/1000)) / 60;
+      var time = (straightDistance / (speedInMps / 1000)) / 60;
       if (time >= 60) {
         timeToArrival = (time / 60).toStringAsFixed(2) + ' ' + S.current.hour;
       } else {
@@ -63,6 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  bool play = false;
+  animate() => play
+      ? animationController.reverse()
+      : animationController.forward();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,11 +93,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 myLocationEnabled: true,
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
+                onTap: (location) {
+                  print(location);
+                },
+                onCameraMove: (ca) {
+                  print(ca.zoom);
+                },
                 onMapCreated: (GoogleMapController con) {
                   controller.complete(con);
                 },
                 initialCameraPosition: const CameraPosition(
-                    target: LatLng(36.747061, 36.1618916))),
+                    zoom: 6,
+                    target: LatLng(35.1994366003667, 38.592870868742466))),
           ),
           // Mentoring Panel
           Hider(
@@ -115,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            // university
                             Padding(
                               padding:
                                   const EdgeInsets.only(right: 25.0, left: 25),
@@ -147,10 +161,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               endIndent: 10,
                               color: Theme.of(context).backgroundColor,
                             ),
+                            // Action Button
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder()),
                               onPressed: () async {
+                                animate();
+                                play = play ? false : true;
                                 var myLocation =
                                     await DeepLinksService.defaultLocation();
                                 if (myLocation != null) {
@@ -158,22 +175,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                       myLocation.longitude);
                                   GoogleMapController con =
                                       await controller.future;
-                                  await con.animateCamera(
-                                      CameraUpdate.newCameraPosition(
-                                          CameraPosition(
-                                    zoom: 19,
-                                    target: latLng,
-                                  )));
+                                  if (play) {
+                                    // send location
+                                    await con.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                      zoom: 19,
+                                      target: latLng,
+                                    )));
+                                  } else {
+                                    await con.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                      zoom: 12,
+                                      target: latLng,
+                                    )));
+                                  }
                                 }
                               },
-                              child: const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Icon(
-                                  Icons.location_on_rounded,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: AnimatedIcon(
+                                  progress: animationController,
+                                  icon: AnimatedIcons.play_pause,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
+                            // speed meter
                             VerticalDivider(
                               thickness: 2.5,
                               indent: 10,
