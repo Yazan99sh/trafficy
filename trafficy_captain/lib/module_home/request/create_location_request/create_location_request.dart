@@ -2,22 +2,41 @@ import 'home_location.dart';
 
 class CreateLocationRequest {
   String? uid;
-  HomeLocation? homeLocation;
+  CurrentLocation? currentLocation;
+  bool? status;
+  double? speedInKmh;
+  String? name;
 
-  CreateLocationRequest({this.uid, this.homeLocation});
+  CreateLocationRequest(
+      {this.uid,
+      this.currentLocation,
+      this.status,
+      this.speedInKmh,
+      this.name});
 
   factory CreateLocationRequest.fromJson(Map<String, dynamic> json) {
+    if (json['captain'] != null) {
+      json = json['captain'];
+    }
     return CreateLocationRequest(
       uid: json['UID'] as String?,
-      homeLocation: json['home_location'] == null
+      status: json['status'],
+      speedInKmh: json['speedInKmh']?.toDouble(),
+      name: json['name'],
+      currentLocation: json['current_location'] == null
           ? null
-          : HomeLocation.fromJson(
-              json['home_location'] as Map<String, dynamic>),
+          : CurrentLocation.fromJson(
+              json['current_location'] as Map<String, dynamic>),
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'UID': uid,
-        'home_location': homeLocation?.toJson(),
+        'captain': {
+          'UID': uid,
+          'current_location': currentLocation?.toJson(),
+          'name': name,
+          'speedInKmh': speedInKmh,
+          'status': status,
+        }
       };
 }
