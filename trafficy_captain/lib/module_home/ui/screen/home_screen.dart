@@ -1,12 +1,21 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart' as lat;
+import 'package:trafficy_captain/di/di_config.dart';
+
 import 'package:trafficy_captain/generated/l10n.dart';
+import 'package:trafficy_captain/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_captain/module_deep_links/service/deep_links_service.dart';
+import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
+import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
+import 'package:trafficy_captain/module_home/request/create_location_request/home_location.dart';
+import 'package:trafficy_captain/module_home/service/home_service.dart';
+import 'package:trafficy_captain/module_home/state_manager/home_state_manager.dart';
 import 'package:trafficy_captain/module_settings/setting_routes.dart';
 import 'package:trafficy_captain/utils/components/custom_app_bar.dart';
 import 'package:trafficy_captain/utils/effect/hidder.dart';
@@ -14,11 +23,15 @@ import 'package:trafficy_captain/utils/effect/scaling.dart';
 
 @injectable
 class HomeScreen extends StatefulWidget {
+  final HomeStateManager _stateManager;
+  const HomeScreen(
+    this._stateManager,
+  );
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Completer<GoogleMapController> controller = Completer();
   double speedInKm = 0.0;
   lat.LatLng defaultUniversityLocation = lat.LatLng(35.0170831, 36.7598127);
@@ -66,9 +79,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   bool play = false;
-  animate() => play
-      ? animationController.reverse()
-      : animationController.forward();
+  animate() =>
+      play ? animationController.reverse() : animationController.forward();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,9 +180,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               onPressed: () async {
                                 animate();
                                 play = play ? false : true;
+
                                 var myLocation =
                                     await DeepLinksService.defaultLocation();
+
                                 if (myLocation != null) {
+                                  var request = CreateLocationRequest(
+                                    uid: getIt<AuthService>().username,
+                                    status: true,
+                                    speedInKmh: 0.0,
+                                    currentLocation: CurrentLocation(
+                                        lat: myLocation.latitude,
+                                        lon: myLocation.longitude),
+                                  );
+                                  if (play) {
+                                    request.status = true;
+                                  } else {
+                                    request.status = false;
+                                  }
+                                  widget._stateManager
+                                      .updateLocation(this, request);
                                   LatLng latLng = LatLng(myLocation.latitude,
                                       myLocation.longitude);
                                   GoogleMapController con =
