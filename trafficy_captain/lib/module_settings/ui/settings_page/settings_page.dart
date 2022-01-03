@@ -39,8 +39,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
         child: ListView(
-          physics:
-              const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           children: [
             Container(
               height: 16,
@@ -82,17 +82,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           child: Icon(Icons.arrow_drop_down_rounded),
                         ),
                         items: [
-                           DropdownMenuItem(
-                            child: Text('العربية', style: TextStyle(
-                              fontFamily: GoogleFonts.balooBhai().fontFamily
-                            ),),
+                          DropdownMenuItem(
+                            child: Text(
+                              'العربية',
+                              style: TextStyle(
+                                  fontFamily:
+                                      GoogleFonts.balooBhai().fontFamily),
+                            ),
                             value: 'ar',
                           ),
-                           DropdownMenuItem(
-                            child: Text('English',
-                            style: TextStyle(
-                              fontFamily: GoogleFonts.ubuntu().fontFamily
-                            ),
+                          DropdownMenuItem(
+                            child: Text(
+                              'English',
+                              style: TextStyle(
+                                  fontFamily: GoogleFonts.ubuntu().fontFamily),
                             ),
                             value: 'en',
                           ),
@@ -102,18 +105,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               .setLanguage(newLang.toString());
                         }),
                   ),
-                   ListTile(
-                     leading: const Icon(Icons.person_rounded),
-                     title: Text(S.of(context).calibration),
-                     trailing: const Padding(
-                       padding: EdgeInsets.only(right: 10.0, left: 10.0),
-                       child: Icon(Icons.location_on_rounded),
-                     ),
-                     onTap: () {
-                         Navigator.of(context).pushNamedAndRemoveUntil(
-                             HomeRoutes.CALIBRATION_SCREEN, (route) => false);  
-                     },
-                   ),
                   Hider(
                     active: widget._authService.isLoggedIn,
                     child: ListTile(
@@ -126,7 +117,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onTap: () {
                         widget._authService.logout().then((value) {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              AuthorizationRoutes.LOGIN_SCREEN, (route) => false);
+                              AuthorizationRoutes.LOGIN_SCREEN,
+                              (route) => false);
                         });
                       },
                     ),
