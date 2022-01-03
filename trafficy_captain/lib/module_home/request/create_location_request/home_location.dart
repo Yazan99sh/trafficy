@@ -1,10 +1,10 @@
-class HomeLocation {
+class CurrentLocation {
   double? lat;
   double? lon;
 
-  HomeLocation({this.lat, this.lon});
+  CurrentLocation({this.lat, this.lon});
 
-  factory HomeLocation.fromJson(Map<String, dynamic> json) => HomeLocation(
+  factory CurrentLocation.fromJson(Map<String, dynamic> json) => CurrentLocation(
         lat: (json['lat'] as num?)?.toDouble(),
         lon: (json['lon'] as num?)?.toDouble(),
       );
