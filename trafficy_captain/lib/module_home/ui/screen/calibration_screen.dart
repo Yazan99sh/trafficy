@@ -35,8 +35,8 @@ class CalibrationScreenState extends State<CalibrationScreen> {
         this,
         CreateLocationRequest(
             uid: getIt<AuthService>().username,
-            homeLocation:
-                HomeLocation(lat: location.latitude, lon: location.longitude)));
+            currentLocation:
+                CurrentLocation(lat: location.latitude, lon: location.longitude)));
   }
 
   @override
