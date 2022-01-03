@@ -43,6 +43,8 @@ class HomeRepository {
         collectionId: '61d1b52b7af6c',
         data: request.toJson(),
       );
+      _logger.info('Request for create Location',
+          request.toJson().toString());
       _logger.info('create Document for collection ${result.$collection}',
           result.data.toString());
       getIt<HomeHiveHelper>().setDocumentID(result.$id);
