@@ -1,6 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:lottie/lottie.dart';
 import 'package:trafficy_captain/abstracts/states/state.dart';
 import 'package:trafficy_captain/generated/l10n.dart';

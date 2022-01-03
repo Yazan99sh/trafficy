@@ -9,7 +9,7 @@ import 'package:trafficy_captain/generated/l10n.dart';
 import 'package:trafficy_captain/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_captain/module_home/home_routes.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
-import 'package:trafficy_captain/module_home/service/calibration_service.dart';
+import 'package:trafficy_captain/module_home/service/home_service.dart';
 import 'package:trafficy_captain/module_home/ui/screen/calibration_screen.dart';
 import 'package:trafficy_captain/module_home/ui/states/calibration_init_state.dart';
 import 'package:trafficy_captain/utils/helpers/custom_flushbar.dart';

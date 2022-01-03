@@ -61,10 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<String> _getNextRoute() async {
     await Future.delayed(const Duration(seconds: 2));
     if (widget._authService.isLoggedIn) {
-      if (getIt<AuthPrefsHelper>().isCalibrated()) {
-        return HomeRoutes.HOME_SCREEN;
-      }
-      return HomeRoutes.CALIBRATION_SCREEN;
+      return HomeRoutes.HOME_SCREEN;
     }
     return AuthorizationRoutes.LOGIN_SCREEN;
   }
