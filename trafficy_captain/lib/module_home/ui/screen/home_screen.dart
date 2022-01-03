@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,14 +6,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart' as lat;
 import 'package:trafficy_captain/di/di_config.dart';
-
 import 'package:trafficy_captain/generated/l10n.dart';
 import 'package:trafficy_captain/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_captain/module_deep_links/service/deep_links_service.dart';
-import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/home_location.dart';
-import 'package:trafficy_captain/module_home/service/home_service.dart';
 import 'package:trafficy_captain/module_home/state_manager/home_state_manager.dart';
 import 'package:trafficy_captain/module_settings/setting_routes.dart';
 import 'package:trafficy_captain/utils/components/custom_app_bar.dart';
@@ -43,8 +39,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
     DeepLinksService.defaultLocation().then((value) {
       if (value != null) {
         var straightDistance = distance.as(
@@ -74,6 +69,15 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
       if (timeToArrival == 'Infinity') timeToArrival = null;
       if (speedInKm <= 0.01) timeToArrival = null;
+      widget._stateManager.updateLocation(
+          this,
+          CreateLocationRequest(
+            uid: getIt<AuthService>().username,
+            status: true,
+            speedInKmh: speedInKm,
+            currentLocation: CurrentLocation(
+                lat: position.latitude, lon: position.longitude),
+          ));
       setState(() {});
     });
   }
@@ -106,10 +110,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
                 onTap: (location) {
-                  print(location);
+                
                 },
                 onCameraMove: (ca) {
-                  print(ca.zoom);
+                 
                 },
                 onMapCreated: (GoogleMapController con) {
                   controller.complete(con);
