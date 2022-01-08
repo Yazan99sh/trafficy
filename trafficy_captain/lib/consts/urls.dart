@@ -2,7 +2,7 @@
 
 class Urls {
   static const String APPWRITE_ENDPOINT =
-      'http://7dde-194-35-232-99.ngrok.io/v1';
+      'http://b3c7-194-35-232-99.ngrok.io/v1';
   static const String APPWRITE_PROJECTID = '61a5cebea8348';
   static const String DOMAIN = 'http://138.197.186.138';
   static const String BASE_API = DOMAIN + '';

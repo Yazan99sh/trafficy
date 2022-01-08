@@ -40,18 +40,25 @@ class AuthService {
         email: username,
         password: password,
       );
+      print('==============================');
       _prefsHelper.setToken(result.providerToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
       _authSubject.add(AuthStatus.AUTHORIZED);
     } catch (e) {
-      e as AppwriteException;
-      Logger().info('Login Response => ', e.response.toString());
-      Logger().info('Login Code => ', e.code.toString());
-      Logger().info('Login Message => ', e.message.toString());
-      String error = StatusCodeHelper.getStatusCodeMessages(e.code.toString());
-      _authSubject.addError(error);
-      throw AuthorizationException(error);
+      if (e is AppwriteException) {
+        Logger().info('Login Response => ', e.response.toString());
+        Logger().info('Login Code => ', e.code.toString());
+        Logger().info('Login Message => ', e.message.toString());
+        String error =
+            StatusCodeHelper.getStatusCodeMessages(e.code.toString());
+        _authSubject.addError(error);
+        throw AuthorizationException(error);
+      } else {
+        print(e.toString());
+        _authSubject.addError(e.toString());
+        throw AuthorizationException(e.toString());
+      }
     }
   }
 

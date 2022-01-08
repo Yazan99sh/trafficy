@@ -4,10 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart' as lat;
 import 'package:trafficy_captain/di/di_config.dart';
 import 'package:trafficy_captain/generated/l10n.dart';
 import 'package:trafficy_captain/module_auth/service/auth_service/auth_service.dart';
+import 'package:trafficy_captain/module_auth/ui/widget/stop_watch.dart';
 import 'package:trafficy_captain/module_deep_links/service/deep_links_service.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/home_location.dart';
@@ -35,11 +37,16 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String? timeToArrival;
   String initDistance = '';
   late AnimationController animationController;
+  Stream<int>? timerStream;
+  StreamSubscription<int>? timerSubscription;
+  String hoursStr = '00';
+  String minutesStr = '00';
+  String secondsStr = '00';
   @override
   void initState() {
     super.initState();
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 450));
     DeepLinksService.defaultLocation().then((value) {
       if (value != null) {
         var straightDistance = distance.as(
@@ -87,7 +94,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       play ? animationController.reverse() : animationController.forward();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
       appBar: Trafficy.appBar(context,
           title: S.current.home,
           canGoBack: false,
@@ -109,12 +116,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 myLocationEnabled: true,
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
-                onTap: (location) {
-                
-                },
-                onCameraMove: (ca) {
-                 
-                },
+                onTap: (location) {},
+                onCameraMove: (ca) {},
                 onMapCreated: (GoogleMapController con) {
                   controller.complete(con);
                 },
@@ -144,7 +147,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // university
+                            // clock
                             Padding(
                               padding:
                                   const EdgeInsets.only(right: 25.0, left: 25),
@@ -152,16 +155,14 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
-                                    FontAwesomeIcons.university,
+                                    FontAwesomeIcons.busAlt,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                   const SizedBox(
                                     height: 8,
                                   ),
                                   Text(
-                                    timeToArrival != null
-                                        ? '$timeToArrival'
-                                        : '$initDistance ${S.current.km}',
+                                    '$minutesStr:$secondsStr',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
@@ -198,8 +199,33 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         lon: myLocation.longitude),
                                   );
                                   if (play) {
+                                    timerStream = stopWatchStream();
+                                    timerSubscription =
+                                        timerStream?.listen((int newTick) {
+                                      setState(() {
+                                        hoursStr = ((newTick / (60 * 60)) % 60)
+                                            .floor()
+                                            .toString()
+                                            .padLeft(2, '0');
+                                        minutesStr = ((newTick / 60) % 60)
+                                            .floor()
+                                            .toString()
+                                            .padLeft(2, '0');
+                                        secondsStr = (newTick % 60)
+                                            .floor()
+                                            .toString()
+                                            .padLeft(2, '0');
+                                      });
+                                    });
                                     request.status = true;
                                   } else {
+                                    timerSubscription?.cancel();
+                                    timerStream = null;
+                                    setState(() {
+                                      hoursStr = '00';
+                                      minutesStr = '00';
+                                      secondsStr = '00';
+                                    });
                                     request.status = false;
                                   }
                                   widget._stateManager
