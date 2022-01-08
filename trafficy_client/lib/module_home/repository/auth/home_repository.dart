@@ -36,4 +36,20 @@ class HomeRepository {
       return AsyncSnapshot.withError(ConnectionState.done, e);
     }
   }
+    Future<AsyncSnapshot> getCaptainsLocation() async {
+    var database = await _appwriteApi.getDataBase();
+    try {
+      DocumentList result = await database.listDocuments(
+        collectionId: '61d1b52b7af6c',
+      );
+      _logger.info('get Document for collection ${result.documents}',
+          result.toMap().toString());
+      return AsyncSnapshot.withData(ConnectionState.done, result.documents);
+    } catch (e) {
+      e as AppwriteException;
+      _logger.error(
+          e.response.toString(), e.message.toString(), StackTrace.current);
+      return AsyncSnapshot.withError(ConnectionState.done, e);
+    }
+  }
 }
