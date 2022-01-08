@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:trafficy_client/abstracts/states/error_state.dart';
 import 'package:trafficy_client/abstracts/states/loading_state.dart';
 import 'package:trafficy_client/abstracts/states/state.dart';
 import 'package:trafficy_client/di/di_config.dart';
