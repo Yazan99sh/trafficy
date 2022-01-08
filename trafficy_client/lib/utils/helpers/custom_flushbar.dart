@@ -7,7 +7,7 @@ class CustomFlushBarHelper {
       required String message,
       int timeout = 4,
       Color? background,
-      bool top = false,
+      bool top = true,
       EdgeInsets? padding,
       EdgeInsets? margin}) {
     return Flushbar(
