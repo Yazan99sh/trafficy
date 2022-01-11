@@ -8,6 +8,8 @@ class ImageAsset {
   static const STORE_CATEGORY_SUPER_MARKET = ROOT + 'super_market.jpg';
   static const AUTH_SVG = ROOT + 'login.svg';
   static const DELIVERY_MOTOR = ROOT + 'delivery_splash.png';
+  static const BUS = ROOT + 'bus.png';
+  static const BUS_DISABLE = ROOT + 'bus_disable.png';
   static const EMPTY_SVG = ROOT + 'Empty.svg';
   static const ERROR_SVG = ROOT + 'error.svg';
   static const TRAFFICY_LOGO = ROOT + 'trafficy.png';

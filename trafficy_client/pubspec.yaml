@@ -104,6 +104,9 @@ dependencies:
   fl_chart: ^0.40.0
   flutter_rating_bar: ^4.0.0
   appwrite: ^2.0.3
+  marker_icon: ^0.7.1
+  custom_info_window: ^1.0.1
+  clippy_flutter: ^2.0.0-nullsafety.1
 
 
 dev_dependencies:

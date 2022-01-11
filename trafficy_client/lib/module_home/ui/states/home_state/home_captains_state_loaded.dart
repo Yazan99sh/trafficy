@@ -1,14 +1,23 @@
+
+import 'package:clippy_flutter/triangle.dart';
+import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:marker_icon/marker_icon.dart';
 import 'package:trafficy_client/abstracts/states/state.dart';
+import 'package:trafficy_client/di/di_config.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_deep_links/service/deep_links_service.dart';
 import 'package:trafficy_client/module_home/model/captains_model.dart';
 import 'package:trafficy_client/module_home/ui/screen/home_screen.dart';
 import 'package:trafficy_client/module_home/ui/widget/google_map_widget.dart';
+import 'package:trafficy_client/module_home/ui/widget/marker.dart';
+import 'package:trafficy_client/module_home/ui/widget/window_info.dart';
+import 'package:trafficy_client/module_theme/pressistance/theme_preferences_helper.dart';
 import 'package:trafficy_client/utils/effect/hidder.dart';
 import 'package:trafficy_client/utils/effect/scaling.dart';
+import 'package:trafficy_client/utils/images/images.dart';
 
 class HomeCaptainsStateLoaded extends States {
   HomeScreenState screenState;
@@ -17,30 +26,50 @@ class HomeCaptainsStateLoaded extends States {
     this.screenState, {
     required this.captains,
   }) : super(screenState) {
-    for (var captain in captains) {
-      if (captain.currentLocation == null) {
-        continue;
-      }
-      markers.add(Marker(
-          markerId: MarkerId(captain.uid),
-          position: captain.currentLocation!,
-          infoWindow: InfoWindow(
-              title: captain.name,
-              snippet: '${captain.speedInKmh}' + S.current.kmh)));
-    }
-    screenState.refresh();
+    getCaptainsMarker(captains, screenState.globalKey).then((value) {
+      markers = value;
+      screenState.refresh();
+    });
   }
   Set<Marker> markers = {};
+
   @override
   Widget getUI(BuildContext context) {
     return Stack(
       children: [
         // Google Map
-        MapWidget(
-          markers: markers,
-          onMapCreated: (con) {
-            screenState.controller.complete(con);
-          },
+        SizedBox(
+          height: double.maxFinite,
+          width: double.maxFinite,
+          child: Stack(
+            children: [
+              MyMarker(screenState.globalKey),
+              Positioned.fill(
+                child: MapWidget(
+                  markers: markers,
+                  onTap: (position) {
+                    screenState.customInfoWindowController.hideInfoWindow!();
+                  },
+                  onCameraMove: (position) {
+                    screenState.customInfoWindowController.onCameraMove!();
+                  },
+                  onMapCreated: (con) async {
+                    screenState.customInfoWindowController.googleMapController =
+                        con;
+                    await con.setMapStyle(
+                        getIt<ThemePreferencesHelper>().getStyleMode());
+                    screenState.controller.complete(con);
+                  },
+                ),
+              ),
+              CustomInfoWindow(
+                controller: screenState.customInfoWindowController,
+                height: 100,
+                width: 150,
+                offset: 50,
+              ),
+            ],
+          ),
         ),
         // Mentoring Panel
         Hider(
@@ -162,5 +191,33 @@ class HomeCaptainsStateLoaded extends States {
         ),
       ],
     );
+  }
+
+  Future<Set<Marker>> getCaptainsMarker(
+      List<CaptainsModel> captains, GlobalKey globalKey) async {
+    Set<Marker> markers = {};
+    for (var captain in captains) {
+      if (captain.currentLocation == null) {
+        continue;
+      }
+      markers.add(Marker(
+          markerId: MarkerId(captain.uid),
+          position: captain.currentLocation!,
+          icon: captain.status
+              ? await MarkerIcon.widgetToIcon(globalKey)
+              : await MarkerIcon.pictureAsset(
+                  assetPath: ImageAsset.BUS_DISABLE, width: 125, height: 125),
+          onTap: () {
+            screenState.customInfoWindowController.addInfoWindow!(
+              WindowInfoWidget(
+                distance: '0',
+                name: captain.name,
+                speed: '${captain.speedInKmh}',
+              ),
+              captain.currentLocation!,
+            );
+          }));
+    }
+    return markers;
   }
 }

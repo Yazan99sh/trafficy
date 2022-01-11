@@ -4,7 +4,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapWidget extends StatefulWidget {
   final void Function(GoogleMapController)? onMapCreated;
   final Set<Marker> markers;
-  const MapWidget({Key? key, this.onMapCreated, this.markers = const <Marker> {}})
+  final Function(LatLng)? onTap;
+  final Function(CameraPosition)? onCameraMove;
+  const MapWidget(
+      {Key? key,
+      this.onMapCreated,
+      this.onTap,
+      this.onCameraMove,
+      this.markers = const <Marker>{}})
       : super(key: key);
 
   @override
@@ -17,6 +24,8 @@ class _MapWidgetState extends State<MapWidget> {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
       child: GoogleMap(
+          onTap: widget.onTap,
+          onCameraMove: widget.onCameraMove,
           compassEnabled: false,
           myLocationButtonEnabled: false,
           myLocationEnabled: true,

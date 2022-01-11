@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:marker_icon/marker_icon.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:trafficy_client/abstracts/states/state.dart';
 import 'package:trafficy_client/generated/l10n.dart';
@@ -34,8 +36,9 @@ class HomeStateManager {
             .show(screenState.context);
       } else {
         CaptainsModel captains = value as CaptainsModel;
-        _subjectState
-            .add(HomeCaptainsStateLoaded(screenState, captains: captains.data));
+
+        _subjectState.add(HomeCaptainsStateLoaded(screenState,
+            captains: captains.data, ));
       }
     });
   }
