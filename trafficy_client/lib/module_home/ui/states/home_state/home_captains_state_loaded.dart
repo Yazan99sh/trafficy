@@ -1,4 +1,3 @@
-
 import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,7 @@ import 'package:trafficy_client/module_theme/pressistance/theme_preferences_help
 import 'package:trafficy_client/utils/effect/hidder.dart';
 import 'package:trafficy_client/utils/effect/scaling.dart';
 import 'package:trafficy_client/utils/images/images.dart';
+import 'package:latlong2/latlong.dart' as lat;
 
 class HomeCaptainsStateLoaded extends States {
   HomeScreenState screenState;
@@ -65,7 +65,7 @@ class HomeCaptainsStateLoaded extends States {
               CustomInfoWindow(
                 controller: screenState.customInfoWindowController,
                 height: 100,
-                width: 150,
+                width: 180,
                 offset: 50,
               ),
             ],
@@ -208,14 +208,23 @@ class HomeCaptainsStateLoaded extends States {
               : await MarkerIcon.pictureAsset(
                   assetPath: ImageAsset.BUS_DISABLE, width: 125, height: 125),
           onTap: () {
-            screenState.customInfoWindowController.addInfoWindow!(
-              WindowInfoWidget(
-                distance: '0',
-                name: captain.name,
-                speed: '${captain.speedInKmh}',
-              ),
-              captain.currentLocation!,
-            );
+            DeepLinksService.getDistance(lat.LatLng(
+                    captain.currentLocation!.latitude,
+                    captain.currentLocation!.longitude))
+                .then((value) {
+              screenState.customInfoWindowController.addInfoWindow!(
+                WindowInfoWidget(
+                  distance: captain.speedInKmh == 0.0
+                      ? value.toStringAsFixed(0) + ' ' + S.current.km
+                      : (value / (captain.speedInKmh / 60)).toStringAsFixed(0) +
+                          ' ' +
+                          S.current.minute,
+                  name: captain.name,
+                  speed: '${captain.speedInKmh}',
+                ),
+                captain.currentLocation!,
+              );
+            });
           }));
     }
     return markers;
