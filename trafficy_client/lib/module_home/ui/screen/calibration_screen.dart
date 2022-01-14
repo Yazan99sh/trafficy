@@ -28,6 +28,12 @@ class CalibrationScreenState extends State<CalibrationScreen> {
   void initState() {
     super.initState();
     currentState = CalibrationInitState(this);
+    widget._stateManager.state.listen((event) {
+      currentState = event;
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   void createLocation(LatLng location) {
@@ -42,7 +48,8 @@ class CalibrationScreenState extends State<CalibrationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Trafficy.appBar(context, title: S.current.calibration,canGoBack: false),
+      appBar: Trafficy.appBar(context,
+          title: S.current.calibration, canGoBack: false),
       body: currentState.getUI(context),
     );
   }

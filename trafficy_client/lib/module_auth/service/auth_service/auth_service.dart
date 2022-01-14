@@ -15,6 +15,7 @@ import 'package:trafficy_client/module_auth/request/register_request/register_re
 import 'package:trafficy_client/module_auth/response/login_response/login_response.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:trafficy_client/module_auth/response/regester_response/regester_response.dart';
+import 'package:trafficy_client/module_home/service/home_service.dart';
 import 'package:trafficy_client/utils/helpers/status_code_helper.dart';
 import 'package:trafficy_client/utils/logger/logger.dart';
 
@@ -35,7 +36,7 @@ class AuthService {
   String get username => _prefsHelper.getUsername() ?? '';
 
   Future<void> loginApi(String username, String password) async {
-    var account = await getIt<AppwriteApi>().getAccount();
+    var account =  getIt<AppwriteApi>().getAccount();
     Logger().info('Login ==>', 'Username => $username');
     Logger().info('Login ==>', 'Password => $password');
     // AppwriteException
@@ -47,6 +48,7 @@ class AuthService {
       _prefsHelper.setToken(result.providerToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
+      await getIt<HomeService>().checkCalibration();
       _authSubject.add(AuthStatus.AUTHORIZED);
     } catch (e) {
       e as AppwriteException;
@@ -107,7 +109,7 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    var account = await getIt<AppwriteApi>().getAccount();
+    var account = getIt<AppwriteApi>().getAccount();
     account.deleteSessions();
     await _prefsHelper.cleanAll();
   }

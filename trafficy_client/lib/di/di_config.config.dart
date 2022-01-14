@@ -29,7 +29,7 @@ import '../module_chat/state_manager/chat_state_manager.dart' as _i29;
 import '../module_chat/ui/screens/chat_page/chat_page.dart' as _i37;
 import '../module_home/home_module.dart' as _i38;
 import '../module_home/repository/auth/home_repository.dart' as _i18;
-import '../module_home/service/calibration_service.dart' as _i19;
+import '../module_home/service/home_service.dart' as _i19;
 import '../module_home/state_manager/calibraion_state_manager.dart' as _i26;
 import '../module_home/state_manager/home_state_manager.dart' as _i20;
 import '../module_home/ui/screen/calibration_screen.dart' as _i36;

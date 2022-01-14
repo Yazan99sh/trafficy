@@ -3,6 +3,9 @@ import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:trafficy_client/abstracts/data_model/data_model.dart';
+import 'package:trafficy_client/app_write_api.dart';
+import 'package:trafficy_client/di/di_config.dart';
+import 'package:trafficy_client/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_client/module_home/model/captains_model.dart';
 import 'package:trafficy_client/module_home/repository/auth/home_repository.dart';
 import 'package:trafficy_client/module_home/request/create_location_request/create_location_request.dart';
@@ -44,6 +47,43 @@ class HomeService {
         response.add(CaptainsResponse.fromJson(element.data));
       }
       return CaptainsModel.withData(response);
+    } else {
+      return DataModel.empty();
+    }
+  }
+
+  /////////////////////////////////////////////////////////
+  // check for calibration values
+  Future<DataModel> checkCalibration() async {
+    AsyncSnapshot snapshot = await _homeRepository.checkCalibration();
+    if (snapshot.hasError) {
+      AppwriteException exception = snapshot.error as AppwriteException;
+      return DataModel.withError(
+          StatusCodeHelper.getStatusCodeMessages(exception));
+    } else if (snapshot.hasData) {
+      List<Document> documents = snapshot.data;
+      for (var element in documents) {
+        var data = CreateLocationRequest.fromJson(element.data);
+        var user = await getIt<AppwriteApi>().getUser();
+        if (user.email == data.uid) {
+          getIt<AuthPrefsHelper>().setCalibrated(element.$id);
+          break;
+        }
+      }
+      return DataModel.empty();
+    } else {
+      return DataModel.empty();
+    }
+  }
+ // update calibration
+  Future<DataModel> updateCalibration(CreateLocationRequest request) async {
+    var user = await getIt<AppwriteApi>().getUser();
+    request.uid = user.email;
+    AsyncSnapshot snapshot = await _homeRepository.updateCalibration(request);
+    if (snapshot.hasError) {
+      AppwriteException exception = snapshot.error as AppwriteException;
+      return DataModel.withError(
+          StatusCodeHelper.getStatusCodeMessages(exception));
     } else {
       return DataModel.empty();
     }

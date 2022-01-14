@@ -6,7 +6,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:trafficy_client/abstracts/states/state.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_home/model/captains_model.dart';
-import 'package:trafficy_client/module_home/service/calibration_service.dart';
+import 'package:trafficy_client/module_home/service/home_service.dart';
 import 'package:trafficy_client/module_home/ui/screen/home_screen.dart';
 import 'package:trafficy_client/module_home/ui/states/home_state/home_captains_state_loaded.dart';
 import 'package:trafficy_client/utils/helpers/custom_flushbar.dart';
