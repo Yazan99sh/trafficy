@@ -3,11 +3,6 @@ import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:trafficy_client/app_write_api.dart';
-import 'package:trafficy_client/consts/urls.dart';
-import 'package:trafficy_client/module_auth/request/login_request/login_request.dart';
-import 'package:trafficy_client/module_auth/request/register_request/register_request.dart';
-import 'package:trafficy_client/module_auth/response/login_response/login_response.dart';
-import 'package:trafficy_client/module_auth/response/regester_response/regester_response.dart';
 import 'package:trafficy_client/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_client/module_home/request/create_location_request/create_location_request.dart';
 import 'package:trafficy_client/module_network/http_client/http_client.dart';
@@ -41,6 +36,7 @@ class HomeRepository {
     try {
       DocumentList result = await database.listDocuments(
         collectionId: '61d1b52b7af6c',
+        limit: 100
       );
       _logger.info('get Document for collection ${result.documents}',
           result.toMap().toString());
