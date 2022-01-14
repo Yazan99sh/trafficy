@@ -1,4 +1,3 @@
-import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -93,30 +92,47 @@ class HomeCaptainsStateLoaded extends States {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(right: 25.0, left: 25),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  FontAwesomeIcons.university,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  screenState.timeToArrival != null
-                                      ? '${screenState.timeToArrival}'
-                                      : '${screenState.initDistance} ${S.current.km}',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .primaryColor
-                                          .withOpacity(0.7)),
-                                ),
-                              ],
+                          GestureDetector(
+                            onTap: () {
+                              screenState.hama =
+                                  screenState.hama ? false : true;
+                              screenState.defaultUniversityLocation = screenState.hama
+                                  ? lat.LatLng(35.1367539, 36.7854284)
+                                  : lat.LatLng(35.0170831, 36.7598127);
+
+                              DeepLinksService.getDistance(
+                                      screenState.defaultUniversityLocation)
+                                  .then((value) => screenState.initDistance =
+                                      value.toStringAsFixed(1));
+                              screenState.refresh();
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 25.0, left: 25),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    screenState.hama
+                                        ? FontAwesomeIcons.city
+                                        : FontAwesomeIcons.university,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    screenState.timeToArrival != null
+                                        ? '${screenState.timeToArrival}'
+                                        : '${screenState.initDistance} ${S.current.km}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.7)),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           VerticalDivider(
@@ -220,7 +236,7 @@ class HomeCaptainsStateLoaded extends States {
                           ' ' +
                           S.current.minute,
                   name: captain.name,
-                  speed: '${captain.speedInKmh}',
+                  speed: captain.speedInKmh.toStringAsFixed(0),
                 ),
                 captain.currentLocation!,
               );
