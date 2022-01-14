@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class CaptainsResponse {
   String? uid;
   CurrentLocation? currentLocation;
@@ -14,7 +16,11 @@ class CaptainsResponse {
 
   factory CaptainsResponse.fromJson(Map<String, dynamic> json) {
     if (json['captain'] != null) {
-      json = json['captain'];
+      if (json['captain'] is String) {
+        json = jsonDecode(json['captain']);
+      } else {
+        json = json['captain'];
+      }
     }
     return CaptainsResponse(
       uid: json['UID'] as String?,
