@@ -32,7 +32,9 @@ class HomeService {
     AsyncSnapshot snapshot = await _homeRepository.getCaptainsLocation();
     if (snapshot.hasError) {
       AppwriteException exception = snapshot.error as AppwriteException;
-      Logger().info('Error while fetching captains for this reason code ${exception.code}', exception.message.toString());
+      Logger().info(
+          'Error while fetching captains for this reason code ${exception.code}',
+          exception.message.toString());
       return DataModel.withError(
           StatusCodeHelper.getStatusCodeMessages(exception));
     } else if (snapshot.hasData) {
