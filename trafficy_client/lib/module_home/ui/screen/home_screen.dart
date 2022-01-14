@@ -28,13 +28,15 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   ////////////////////////////////////////////////////////////
+  // hama city
+  bool hama = false;
   // google map controller
   Completer<GoogleMapController> controller = Completer();
   late CustomInfoWindowController customInfoWindowController;
   // current speed value in km/h
   double speedInKm = 0.0;
   // default defaultUniversityLocation
-  lat.LatLng defaultUniversityLocation = lat.LatLng(35.0170831, 36.7598127);
+  lat.LatLng defaultUniversityLocation =  lat.LatLng(35.0170831, 36.7598127);
   // distance value between university & home
   final lat.Distance distance = const lat.Distance();
   // time to arrival to university
