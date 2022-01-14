@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:appwrite/appwrite.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -6,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:latlong2/latlong.dart' as lat;
 import 'package:trafficy_client/abstracts/states/state.dart';
+import 'package:trafficy_client/app_write_api.dart';
 import 'package:trafficy_client/di/di_config.dart';
 import 'package:trafficy_client/generated/l10n.dart';
 import 'package:trafficy_client/module_deep_links/service/deep_links_service.dart';
@@ -15,6 +17,7 @@ import 'package:trafficy_client/module_settings/setting_routes.dart';
 import 'package:trafficy_client/module_theme/pressistance/theme_preferences_helper.dart';
 import 'package:trafficy_client/module_theme/service/theme_service/theme_service.dart';
 import 'package:trafficy_client/utils/components/custom_app_bar.dart';
+import 'package:trafficy_client/utils/logger/logger.dart';
 
 @injectable
 class HomeScreen extends StatefulWidget {
@@ -36,7 +39,7 @@ class HomeScreenState extends State<HomeScreen> {
   // current speed value in km/h
   double speedInKm = 0.0;
   // default defaultUniversityLocation
-  lat.LatLng defaultUniversityLocation =  lat.LatLng(35.0170831, 36.7598127);
+  lat.LatLng defaultUniversityLocation = lat.LatLng(35.0170831, 36.7598127);
   // distance value between university & home
   final lat.Distance distance = const lat.Distance();
   // time to arrival to university
@@ -47,6 +50,7 @@ class HomeScreenState extends State<HomeScreen> {
   late States currentState;
   ///////////////////////////////////////////////////////////////
   final GlobalKey globalKey = GlobalKey();
+  RealtimeSubscription? realtimeSubscription;
   @override
   void initState() {
     super.initState();
@@ -98,6 +102,7 @@ class HomeScreenState extends State<HomeScreen> {
       if (speedInKm <= 0.01) timeToArrival = null;
       setState(() {});
     });
+    realtimeListener();
   }
 
   void refresh() {
@@ -120,5 +125,15 @@ class HomeScreenState extends State<HomeScreen> {
                   context: context)
             ]),
         body: currentState.getUI(context));
+  }
+
+  void realtimeListener()  {
+    var realtime = getIt<AppwriteApi>().getRealTime();
+    realtimeSubscription = realtime.subscribe(
+        ['collections.61d1b52b7af6c', 'collections.61d1b52b7af6c.documents']);
+    realtimeSubscription?.stream.listen((event) {
+      Logger().info('RealTime channel', '===> Action Has been made');
+      widget._stateManager.getCaptains(this);
+    });
   }
 }
