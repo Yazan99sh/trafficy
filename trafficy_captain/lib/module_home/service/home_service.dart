@@ -24,7 +24,7 @@ class HomeService {
     if (snapshot.hasError) {
       AppwriteException exception = snapshot.error as AppwriteException;
       return DataModel.withError(
-          StatusCodeHelper.getStatusCodeMessages(exception));
+          StatusCodeHelper.getStatusCodeMessages(exception.code));
     } else if (snapshot.hasData) {
       List<Document> documents = snapshot.data;
       for (var element in documents) {
@@ -49,7 +49,7 @@ class HomeService {
     if (snapshot.hasError) {
       AppwriteException exception = snapshot.error as AppwriteException;
       return DataModel.withError(
-          StatusCodeHelper.getStatusCodeMessages(exception));
+          StatusCodeHelper.getStatusCodeMessages(exception.code));
     } else {
       return DataModel.empty();
     }
@@ -61,9 +61,10 @@ class HomeService {
     request.name = user.name;
     AsyncSnapshot snapshot = await _homeRepository.updateLocation(request);
     if (snapshot.hasError) {
+      await getIt<HomeHiveHelper>().clean();
       AppwriteException exception = snapshot.error as AppwriteException;
       return DataModel.withError(
-          StatusCodeHelper.getStatusCodeMessages(exception));
+          StatusCodeHelper.getStatusCodeMessages(exception.code));
     } else {
       return DataModel.empty();
     }

@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:trafficy_captain/abstracts/states/state.dart';
-import 'package:trafficy_captain/app_write_api.dart';
 import 'package:trafficy_captain/di/di_config.dart';
 import 'package:trafficy_captain/generated/l10n.dart';
 import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
@@ -21,7 +20,6 @@ class HomeStateManager {
     HomeScreenState screenState,
     CreateLocationRequest request,
   ) {
-     
     // check for document
     if (getIt<HomeHiveHelper>().getDocumentID() != null) {
       _homeService.updateLocation(request).then((value) {

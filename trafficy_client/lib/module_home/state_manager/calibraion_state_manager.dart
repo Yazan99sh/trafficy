@@ -30,9 +30,16 @@ class CalibrationStateManager {
     if (getIt<AuthPrefsHelper>().getCalibrationDocument() != null) {
       _homeService.updateCalibration(request).then((value) {
         if (value.hasError) {
+          _subjectState.add(CalibrationInitState(screenState));
           CustomFlushBarHelper.createError(
                   title: S.current.warnning,
                   message: value.error ?? S.current.errorHappened)
+              .show(screenState.context);
+        } else {
+          Navigator.of(screenState.context).pushNamedAndRemoveUntil(
+              HomeRoutes.HOME_SCREEN, (route) => false);
+          CustomFlushBarHelper.createSuccess(
+                  title: S.current.warnning, message: S.current.saveSuccess)
               .show(screenState.context);
         }
       });
@@ -40,12 +47,13 @@ class CalibrationStateManager {
       // check if there is a document online
       _homeService.checkCalibration().then((value) {
         if (value.hasError) {
+          _subjectState.add(CalibrationInitState(screenState));
           CustomFlushBarHelper.createError(
                   title: S.current.warnning,
                   message: value.error ?? S.current.errorHappened)
               .show(screenState.context);
         } else {
-          // check again
+          // update
           if (getIt<AuthPrefsHelper>().getCalibrationDocument() != null) {
             createLocation(screenState, request);
           } else {
@@ -58,7 +66,6 @@ class CalibrationStateManager {
                         message: value.error ?? S.current.errorHappened)
                     .show(screenState.context);
               } else {
-                _subjectState.add(CalibrationInitState(screenState));
                 Navigator.of(screenState.context).pushNamedAndRemoveUntil(
                     HomeRoutes.HOME_SCREEN, (route) => false);
                 CustomFlushBarHelper.createSuccess(

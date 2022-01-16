@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'home_location.dart';
 
 class CreateLocationRequest {
@@ -16,7 +18,11 @@ class CreateLocationRequest {
 
   factory CreateLocationRequest.fromJson(Map<String, dynamic> json) {
     if (json['captain'] != null) {
-      json = json['captain'];
+      if (json['captain'] is String) {
+        json = jsonDecode(json['captain']);
+      } else {
+        json = json['captain'];
+      }
     }
     return CreateLocationRequest(
       uid: json['UID'] as String?,

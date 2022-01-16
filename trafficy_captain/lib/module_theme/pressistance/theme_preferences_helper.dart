@@ -18,4 +18,12 @@ class ThemePreferencesHelper {
     bool? dark = preferences.get('dark') ?? false;
     return dark == true;
   }
+  void setMapStyle(String style) {
+    preferences.put('map', style);
+  }
+
+  String getStyleMode() {
+    return preferences.get('map') ?? '[]';
+  }
+  
 }

@@ -433,6 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestMeeting":
             MessageLookupByLibrary.simpleMessage("Request Meeting"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "sar": MessageLookupByLibrary.simpleMessage("SAR"),
         "saudiArabia": MessageLookupByLibrary.simpleMessage("Saudi Arabia"),
         "saudiRiyal": MessageLookupByLibrary.simpleMessage("Saudi Riyal"),
@@ -454,6 +455,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "second": MessageLookupByLibrary.simpleMessage("second"),
         "seconds": MessageLookupByLibrary.simpleMessage("seconds"),
         "sendMeCode": MessageLookupByLibrary.simpleMessage("Send me code"),
+        "serviceNotAvailable": MessageLookupByLibrary.simpleMessage(
+            "Service Not Available , because you didn\'t accept needed permission"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "showAll": MessageLookupByLibrary.simpleMessage("Show All"),

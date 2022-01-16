@@ -50,7 +50,6 @@ class HomeScreenState extends State<HomeScreen> {
   late States currentState;
   ///////////////////////////////////////////////////////////////
   final GlobalKey globalKey = GlobalKey();
-  RealtimeSubscription? realtimeSubscription;
   @override
   void initState() {
     super.initState();
@@ -102,7 +101,8 @@ class HomeScreenState extends State<HomeScreen> {
       if (speedInKm <= 0.01) timeToArrival = null;
       setState(() {});
     });
-    realtimeListener();
+    // listener
+    streamListener();
   }
 
   void refresh() {
@@ -127,11 +127,11 @@ class HomeScreenState extends State<HomeScreen> {
         body: currentState.getUI(context));
   }
 
-  void realtimeListener()  {
-    var realtime = getIt<AppwriteApi>().getRealTime();
-    realtimeSubscription = realtime.subscribe(
-        ['collections.61d1b52b7af6c', 'collections.61d1b52b7af6c.documents']);
-    realtimeSubscription?.stream.listen((event) {
+  void streamListener() {
+    final realtime = getIt<AppwriteApi>().getRealTime();
+    final realtimeSubscription = realtime.subscribe(
+        ['collections.61e1e753eafb8', 'collections.61e1e753eafb8.documents']);
+    realtimeSubscription.stream.listen((event) {
       Logger().info('RealTime channel', '===> Action Has been made');
       widget._stateManager.getCaptains(this);
     });

@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:trafficy_captain/di/di_config.dart';
 import 'package:trafficy_captain/module_localization/service/localization_service/localization_service.dart';
+import 'package:trafficy_captain/module_theme/map_style.dart';
 import 'package:trafficy_captain/module_theme/pressistance/theme_preferences_helper.dart';
 
 @injectable
@@ -32,6 +33,7 @@ class AppThemeDataService {
   ThemeData getActiveTheme() {
     var dark = _preferencesHelper.isDarkMode();
     if (dark == true) {
+      mapStyle(dark);
       return ThemeData(
         brightness: Brightness.dark,
         primaryColor: primaryColor,
@@ -45,6 +47,7 @@ class AppThemeDataService {
             .copyWith(secondary: accentColor, brightness: Brightness.dark),
       );
     }
+    mapStyle(dark);
     return ThemeData(
         brightness: Brightness.light,
         primaryColor: primaryColor,
@@ -76,5 +79,17 @@ class AppThemeDataService {
     }
     var activeTheme = getActiveTheme();
     _darkModeSubject.add(activeTheme);
+  }
+
+  void mapStyle(bool darkMode) {
+    String darkStyle = MapStyle.darkStyle;
+
+    String lightStyle = '''[]''';
+
+    if (darkMode) {
+      _preferencesHelper.setMapStyle(darkStyle);
+    } else {
+      _preferencesHelper.setMapStyle(lightStyle);
+    }
   }
 }

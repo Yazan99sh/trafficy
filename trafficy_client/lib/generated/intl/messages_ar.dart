@@ -424,6 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestMeeting":
             MessageLookupByLibrary.simpleMessage("اطلب موعدا للقاء"),
         "resendCode": MessageLookupByLibrary.simpleMessage("اعادة الارسال"),
+        "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
         "sar": MessageLookupByLibrary.simpleMessage("ر.س"),
         "saudiArabia": MessageLookupByLibrary.simpleMessage("السعودية"),
         "saudiRiyal": MessageLookupByLibrary.simpleMessage("ريال سعودي"),
@@ -445,6 +446,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "second": MessageLookupByLibrary.simpleMessage("ثانية"),
         "seconds": MessageLookupByLibrary.simpleMessage("ثواني"),
         "sendMeCode": MessageLookupByLibrary.simpleMessage("ارسل رمز التأكيد"),
+        "serviceNotAvailable": MessageLookupByLibrary.simpleMessage(
+            "لا يمكنك استخدام خدمة تطبيق ترافيكي لعدم تمكننا من الحصول على الأذونات المطلوبة"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "share": MessageLookupByLibrary.simpleMessage("المشاركة"),
         "showAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),

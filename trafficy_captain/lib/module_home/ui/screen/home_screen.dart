@@ -15,6 +15,8 @@ import 'package:trafficy_captain/module_home/request/create_location_request/cre
 import 'package:trafficy_captain/module_home/request/create_location_request/home_location.dart';
 import 'package:trafficy_captain/module_home/state_manager/home_state_manager.dart';
 import 'package:trafficy_captain/module_settings/setting_routes.dart';
+import 'package:trafficy_captain/module_theme/pressistance/theme_preferences_helper.dart';
+import 'package:trafficy_captain/module_theme/service/theme_service/theme_service.dart';
 import 'package:trafficy_captain/utils/components/custom_app_bar.dart';
 import 'package:trafficy_captain/utils/effect/hidder.dart';
 import 'package:trafficy_captain/utils/effect/scaling.dart';
@@ -42,11 +44,17 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String hoursStr = '00';
   String minutesStr = '00';
   String secondsStr = '00';
+  bool feed = false;
   @override
   void initState() {
     super.initState();
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 450));
+    getIt<AppThemeDataService>().darkModeStream.listen((event) async {
+      GoogleMapController control = await controller.future;
+      await control.setMapStyle(getIt<ThemePreferencesHelper>().getStyleMode());
+    });
+
     DeepLinksService.defaultLocation().then((value) {
       if (value != null) {
         var straightDistance = distance.as(
@@ -60,7 +68,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {});
     });
     var options = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 10);
+      accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 100);
     Geolocator.getPositionStream(locationSettings: options).listen((position) {
       var speedInMps = position.speed;
       speedInKm = speedInMps * (18 / 5);
@@ -76,15 +84,17 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       }
       if (timeToArrival == 'Infinity') timeToArrival = null;
       if (speedInKm <= 0.01) timeToArrival = null;
-      widget._stateManager.updateLocation(
-          this,
-          CreateLocationRequest(
-            uid: getIt<AuthService>().username,
-            status: true,
-            speedInKmh: speedInKm,
-            currentLocation: CurrentLocation(
-                lat: position.latitude, lon: position.longitude),
-          ));
+      if (play && feed) {
+        widget._stateManager.updateLocation(
+            this,
+            CreateLocationRequest(
+              uid: getIt<AuthService>().username,
+              status: true,
+              speedInKmh: speedInKm,
+              currentLocation: CurrentLocation(
+                  lat: position.latitude, lon: position.longitude),
+            ));
+      }
       setState(() {});
     });
   }
@@ -94,7 +104,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       play ? animationController.reverse() : animationController.forward();
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       appBar: Trafficy.appBar(context,
           title: S.current.home,
           canGoBack: false,
@@ -192,33 +202,37 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 if (myLocation != null) {
                                   var request = CreateLocationRequest(
                                     uid: getIt<AuthService>().username,
-                                    status: true,
+                                    status: null,
                                     speedInKmh: 0.0,
                                     currentLocation: CurrentLocation(
                                         lat: myLocation.latitude,
                                         lon: myLocation.longitude),
                                   );
                                   if (play) {
+                                    request.status = true;
                                     timerStream = stopWatchStream();
                                     timerSubscription =
                                         timerStream?.listen((int newTick) {
-                                      setState(() {
-                                        hoursStr = ((newTick / (60 * 60)) % 60)
-                                            .floor()
-                                            .toString()
-                                            .padLeft(2, '0');
-                                        minutesStr = ((newTick / 60) % 60)
-                                            .floor()
-                                            .toString()
-                                            .padLeft(2, '0');
-                                        secondsStr = (newTick % 60)
-                                            .floor()
-                                            .toString()
-                                            .padLeft(2, '0');
-                                      });
+                                      if (mounted) {
+                                        setState(() {
+                                          hoursStr =
+                                              ((newTick / (60 * 60)) % 60)
+                                                  .floor()
+                                                  .toString()
+                                                  .padLeft(2, '0');
+                                          minutesStr = ((newTick / 60) % 60)
+                                              .floor()
+                                              .toString()
+                                              .padLeft(2, '0');
+                                          secondsStr = (newTick % 60)
+                                              .floor()
+                                              .toString()
+                                              .padLeft(2, '0');
+                                        });
+                                      }
                                     });
-                                    request.status = true;
                                   } else {
+                                    request.status = false;
                                     timerSubscription?.cancel();
                                     timerStream = null;
                                     setState(() {
@@ -226,7 +240,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       minutesStr = '00';
                                       secondsStr = '00';
                                     });
-                                    request.status = false;
                                   }
                                   widget._stateManager
                                       .updateLocation(this, request);
@@ -242,6 +255,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       zoom: 19,
                                       target: latLng,
                                     )));
+                                    feed = true;
                                   } else {
                                     await con.animateCamera(
                                         CameraUpdate.newCameraPosition(
@@ -249,6 +263,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       zoom: 12,
                                       target: latLng,
                                     )));
+                                    feed = false;
                                   }
                                 }
                               },

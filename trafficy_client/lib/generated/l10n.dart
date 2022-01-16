@@ -3779,6 +3779,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Service Not Available , because you didn't accept needed permission`
+  String get serviceNotAvailable {
+    return Intl.message(
+      'Service Not Available , because you didn\'t accept needed permission',
+      name: 'serviceNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message(
+      'Retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -40,7 +40,6 @@ class AuthService {
         email: username,
         password: password,
       );
-      print('==============================');
       _prefsHelper.setToken(result.providerToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);

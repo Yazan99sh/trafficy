@@ -6,6 +6,7 @@ import 'package:trafficy_captain/di/di_config.dart';
 import 'package:trafficy_captain/module_auth/authorization_routes.dart';
 import 'package:trafficy_captain/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_captain/module_auth/service/auth_service/auth_service.dart';
+import 'package:trafficy_captain/module_deep_links/service/deep_links_service.dart';
 import 'package:trafficy_captain/module_home/home_routes.dart';
 import 'package:trafficy_captain/utils/effect/hidder.dart';
 import 'package:trafficy_captain/utils/images/images.dart';
@@ -34,9 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Client client = Client();
-    client.setEndpoint(Urls.APPWRITE_ENDPOINT);
-    client.setProject(Urls.APPWRITE_PROJECTID);
     return Scaffold(
         body: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,6 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<String> _getNextRoute() async {
     await Future.delayed(const Duration(seconds: 2));
+    await DeepLinksService.checkPermission();
     if (widget._authService.isLoggedIn) {
       return HomeRoutes.HOME_SCREEN;
     }

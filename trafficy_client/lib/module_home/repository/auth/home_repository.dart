@@ -43,7 +43,7 @@ class HomeRepository {
         collectionId: '61c789d87c3d1',
         data: request.toJson(),
       );
-      _logger.info('create Document for collection ${result.$collection}',
+      _logger.info('Document created for collection ${result.$collection}',
           result.data.toString());
       getIt<AuthPrefsHelper>().setCalibrated(result.$id);
       return AsyncSnapshot.withData(ConnectionState.done, result.data);
@@ -56,14 +56,14 @@ class HomeRepository {
   }
 
   Future<AsyncSnapshot> updateCalibration(CreateLocationRequest request) async {
-    var database = await _appwriteApi.getDataBase();
+    var database =  _appwriteApi.getDataBase();
     try {
       Document result = await database.updateDocument(
         collectionId: '61c789d87c3d1',
         documentId:getIt<AuthPrefsHelper>().getCalibrationDocument()??'',
         data: request.toJson(),
       );
-      _logger.info('create Document for collection ${result.$collection}',
+      _logger.info('Document updated for collection ${result.$collection}',
           result.data.toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.data);
     } catch (e) {
@@ -78,7 +78,7 @@ class HomeRepository {
     var database = await _appwriteApi.getDataBase();
     try {
       DocumentList result = await database.listDocuments(
-          collectionId: '61d1b52b7af6c', limit: 100);
+          collectionId: '61e1e753eafb8', limit: 100);
       _logger.info('get Document for collection ${result.documents}',
           result.toMap().toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.documents);

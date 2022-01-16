@@ -6,7 +6,9 @@ import 'package:trafficy_client/di/di_config.dart';
 import 'package:trafficy_client/module_auth/authorization_routes.dart';
 import 'package:trafficy_client/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_client/module_auth/service/auth_service/auth_service.dart';
+import 'package:trafficy_client/module_deep_links/service/deep_links_service.dart';
 import 'package:trafficy_client/module_home/home_routes.dart';
+import 'package:trafficy_client/module_splash/splash_routes.dart';
 import 'package:trafficy_client/utils/effect/hidder.dart';
 import 'package:trafficy_client/utils/images/images.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<String> _getNextRoute() async {
     await Future.delayed(const Duration(seconds: 2));
+    bool permission = await DeepLinksService.checkPermission();
+    if (permission == false) return SplashRoutes.BlOCK_SCREEN;
     if (widget._authService.isLoggedIn) {
       if (getIt<AuthPrefsHelper>().isCalibrated()) {
         return HomeRoutes.HOME_SCREEN;

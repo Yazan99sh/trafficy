@@ -23,9 +23,9 @@ class HomeRepository {
     var database = await _appwriteApi.getDataBase();
     try {
       DocumentList result = await database.listDocuments(
-        collectionId: '61d1b52b7af6c',
+        collectionId: '61e1e753eafb8',
       );
-      _logger.info('create Document for collection ${result.documents}',
+      _logger.info('check Document for collection ${result.documents}',
           result.toMap().toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.documents);
     } catch (e) {
@@ -39,12 +39,12 @@ class HomeRepository {
   Future<AsyncSnapshot> createLocation(CreateLocationRequest request) async {
     var database = await _appwriteApi.getDataBase();
     try {
+      _logger.info('Request for create Location', request.toJson().toString());
       Document result = await database.createDocument(
-        collectionId: '61d1b52b7af6c',
+        read: ['*'],
+        collectionId: '61e1e753eafb8',
         data: request.toJson(),
       );
-      _logger.info('Request for create Location',
-          request.toJson().toString());
       _logger.info('create Document for collection ${result.$collection}',
           result.data.toString());
       getIt<HomeHiveHelper>().setDocumentID(result.$id);
@@ -61,16 +61,28 @@ class HomeRepository {
     var document = getIt<HomeHiveHelper>().getDocumentID();
     var database = await _appwriteApi.getDataBase();
     try {
+      _logger.info('Request for update Location document $document',
+          request.toJson().toString());
+      print('=======================================================');
+      print(request.toJson());
+      print('=======================================================');
       Document result = await database.updateDocument(
         documentId: document ?? '-1',
-        collectionId: '61d1b52b7af6c',
+        collectionId: '61e1e753eafb8',
+        read: ['*'],
         data: request.toJson(),
       );
-      _logger.info('update Document for collection ${result.$collection}',
+      _logger.info('Document updated for collection ${result.$collection}',
           result.data.toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.data);
     } catch (e) {
       e as AppwriteException;
+      print('=======================================================');
+      print(e.code);
+      print(e.response);
+      print(e.message);
+      print('=======================================================');
+
       _logger.error(
           e.response.toString(), e.message.toString(), StackTrace.current);
       return AsyncSnapshot.withError(ConnectionState.done, e);
