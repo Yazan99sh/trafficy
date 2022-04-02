@@ -84,9 +84,7 @@ class _ChatWriterWidget extends State<ChatWriterWidget> {
                           imageFile = null;
                           notUploaded = true;
                           if (value != null) {
-                            sendMessage(value.contains('http')
-                                ? value
-                                : Urls.IMAGES_ROOT + value);
+                            sendMessage(value);
                             setState(() {});
                           }
                         });

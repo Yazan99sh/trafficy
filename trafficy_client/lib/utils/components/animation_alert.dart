@@ -146,7 +146,7 @@ class CustomInvoiceAlert extends StatelessWidget {
                                                 Navigator.of(context).pop();
                                               },
                                               child: Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Colors.black38,
                                                   shape: BoxShape.circle,
                                                 ),
@@ -168,7 +168,7 @@ class CustomInvoiceAlert extends StatelessWidget {
                                           child: Hero(
                                               tag: 'Invoice',
                                               child: Image.network(
-                                                  Urls.IMAGES_ROOT + image)),
+                                                  image)),
                                           resetDuration:
                                               const Duration(milliseconds: 100),
                                           maxScale: 2.5,

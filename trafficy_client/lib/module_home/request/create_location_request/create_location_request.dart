@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'home_location.dart';
 
 class CreateLocationRequest {
@@ -12,12 +14,12 @@ class CreateLocationRequest {
       homeLocation: json['home_location'] == null
           ? null
           : HomeLocation.fromJson(
-              json['home_location'] as Map<String, dynamic>),
+              json['home_location']),
     );
   }
 
   Map<String, dynamic> toJson() => {
         'UID': uid,
-        'home_location': homeLocation?.toJson(),
+        'home_location': json.encode(homeLocation?.toJson()),
       };
 }

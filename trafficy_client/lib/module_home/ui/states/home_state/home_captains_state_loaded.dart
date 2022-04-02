@@ -42,6 +42,7 @@ class HomeCaptainsStateLoaded extends States {
           width: double.maxFinite,
           child: Stack(
             children: [
+              // marker
               MyMarker(screenState.globalKey),
               Positioned.fill(
                 child: MapWidget(

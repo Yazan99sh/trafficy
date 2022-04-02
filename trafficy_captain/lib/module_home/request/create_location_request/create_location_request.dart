@@ -36,13 +36,14 @@ class CreateLocationRequest {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'captain': {
+  Map<String, String> toJson() {
+        var map = {
           'UID': uid,
           'current_location': currentLocation?.toJson(),
           'name': name,
           'speedInKmh': speedInKmh,
           'status': status,
-        }
-      };
+        };
+        return {'captain':json.encode(map)}; 
+      }
 }

@@ -9,6 +9,7 @@ import 'package:trafficy_client/module_auth/service/auth_service/auth_service.da
 import 'package:trafficy_client/module_home/request/create_location_request/create_location_request.dart';
 import 'package:trafficy_client/module_network/http_client/http_client.dart';
 import 'package:trafficy_client/utils/logger/logger.dart';
+import 'package:uuid/uuid.dart';
 
 @injectable
 class HomeRepository {
@@ -41,6 +42,7 @@ class HomeRepository {
     try {
       Document result = await database.createDocument(
         collectionId: '61c789d87c3d1',
+        documentId: Uuid().v1(),
         data: request.toJson(),
       );
       _logger.info('Document created for collection ${result.$collection}',

@@ -25,7 +25,7 @@
           <action android:name="android.intent.action.VIEW" />
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
-          <data android:scheme="appwrite-callback-61a5cebea8348" />
+          <data android:scheme="appwrite-callback-6208205e15fb18447ce3" />
         </intent-filter>
       </activity>
     <!-- Don't delete the meta-data below.

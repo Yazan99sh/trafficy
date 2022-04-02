@@ -9,6 +9,7 @@ import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
 import 'package:trafficy_captain/module_network/http_client/http_client.dart';
 import 'package:trafficy_captain/utils/logger/logger.dart';
+import 'package:uuid/uuid.dart';
 
 @injectable
 class HomeRepository {
@@ -41,9 +42,9 @@ class HomeRepository {
     try {
       _logger.info('Request for create Location', request.toJson().toString());
       Document result = await database.createDocument(
-        read: ['*'],
+        read: ['role:all'],
         collectionId: '61e1e753eafb8',
-        data: request.toJson(),
+        data: request.toJson(), documentId: const Uuid().v1(),
       );
       _logger.info('create Document for collection ${result.$collection}',
           result.data.toString());
@@ -69,7 +70,7 @@ class HomeRepository {
       Document result = await database.updateDocument(
         documentId: document ?? '-1',
         collectionId: '61e1e753eafb8',
-        read: ['*'],
+        read: ['role:all'],
         data: request.toJson(),
       );
       _logger.info('Document updated for collection ${result.$collection}',

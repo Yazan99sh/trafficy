@@ -77,7 +77,7 @@ class CustomNetworkImage extends StatelessWidget {
       );
     } else {
       if (!image.contains('http')) {
-        image = Urls.IMAGES_ROOT + image;
+      
       }
       return GestureDetector(
         onTap: () {},
