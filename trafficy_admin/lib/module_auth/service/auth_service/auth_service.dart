@@ -9,7 +9,6 @@ import 'package:trafficy_admin/module_auth/manager/auth_manager/auth_manager.dar
 import 'package:trafficy_admin/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_admin/module_auth/request/register_request/register_request.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:trafficy_admin/module_home/service/home_service.dart';
 import 'package:trafficy_admin/utils/helpers/status_code_helper.dart';
 import 'package:trafficy_admin/utils/logger/logger.dart';
 
@@ -42,7 +41,6 @@ class AuthService {
       _prefsHelper.setToken(result.providerToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
-      await getIt<HomeService>().checkCalibration();
       _authSubject.add(AuthStatus.AUTHORIZED);
     } catch (e) {
       if (e is AppwriteException) {

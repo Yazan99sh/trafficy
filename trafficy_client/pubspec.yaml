@@ -99,7 +99,7 @@ dependencies:
   pinch_zoom: ^1.0.0
   fl_chart: ^0.40.0
   flutter_rating_bar: ^4.0.0
-  appwrite: ^3.0.1
+  appwrite: ^4.0.1
   marker_icon: ^0.7.1
   custom_info_window: ^1.0.1
   clippy_flutter: ^2.0.0-nullsafety.1

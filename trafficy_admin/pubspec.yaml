@@ -112,7 +112,7 @@ dev_dependencies:
     sdk: flutter
   flutter_gherkin: ^2.0.0
   # Build Runner And DI Generator
-  build_runner: ^2.1.4
+  build_runner: ^2.1.8
   injectable_generator: ^1.4.1
   # Flutter Launcher Icons Setup
   flutter_launcher_icons: ^0.9.0

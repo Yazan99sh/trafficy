@@ -103,7 +103,7 @@ dependencies:
   pinch_zoom: ^1.0.0
   fl_chart: ^0.40.0
   flutter_rating_bar: ^4.0.0
-  appwrite: ^3.0.1
+  appwrite: ^4.0.1
 
 
 dev_dependencies:

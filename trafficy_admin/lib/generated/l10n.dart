@@ -3799,6 +3799,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please press again to exit`
+  String get exitWarning {
+    return Intl.message(
+      'Please press again to exit',
+      name: 'exitWarning',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

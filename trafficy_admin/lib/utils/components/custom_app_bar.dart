@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Trafficy {
- static double borderRadius = 25;
+  static double borderRadius = 25;
   static PreferredSizeWidget appBar(
     BuildContext context, {
     required title,
@@ -9,6 +9,7 @@ class Trafficy {
     Color? colorIcon,
     Color? buttonBackground,
     Color? background,
+    IconData? icon,
     List<Widget>? actions,
     bool canGoBack = true,
   }) {
@@ -40,7 +41,7 @@ class Trafficy {
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.arrow_back,
+                        icon ?? Icons.arrow_back,
                         color: colorIcon ?? Colors.white,
                       ),
                     ),
@@ -53,7 +54,10 @@ class Trafficy {
     );
   }
 
-  static Widget action({required IconData icon, required VoidCallback onTap,required BuildContext context}) {
+  static Widget action(
+      {required IconData icon,
+      required VoidCallback onTap,
+      required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(

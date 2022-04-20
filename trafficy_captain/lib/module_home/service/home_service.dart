@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:trafficy_captain/abstracts/data_model/data_model.dart';
 import 'package:trafficy_captain/app_write_api.dart';
 import 'package:trafficy_captain/di/di_config.dart';
-import 'package:trafficy_captain/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
 import 'package:trafficy_captain/module_home/repository/home_repository.dart';
 import 'package:trafficy_captain/module_home/request/create_location_request/create_location_request.dart';
@@ -59,12 +58,19 @@ class HomeService {
     var account = await getIt<AppwriteApi>().getAccount();
     var user = await account.get();
     request.name = user.name;
-    AsyncSnapshot snapshot = await _homeRepository.updateLocation(request);
+    AsyncSnapshot snapshot = await _homeRepository
+        .updateLocation(request)
+        ;
     if (snapshot.hasError) {
-      await getIt<HomeHiveHelper>().clean();
-      AppwriteException exception = snapshot.error as AppwriteException;
-      return DataModel.withError(
-          StatusCodeHelper.getStatusCodeMessages(exception.code));
+      snapshot = await _homeRepository.deleteLocation();
+      snapshot = await _homeRepository.createLocation(request);
+      if (snapshot.hasError) {
+        await getIt<HomeHiveHelper>().clean();
+        AppwriteException exception = snapshot.error as AppwriteException;
+        return DataModel.withError(
+            StatusCodeHelper.getStatusCodeMessages(exception.code));
+      }
+      return DataModel.empty();
     } else {
       return DataModel.empty();
     }

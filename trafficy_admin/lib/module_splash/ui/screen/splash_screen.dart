@@ -7,7 +7,7 @@ import 'package:trafficy_admin/module_auth/authorization_routes.dart';
 import 'package:trafficy_admin/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_admin/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_admin/module_deep_links/service/deep_links_service.dart';
-import 'package:trafficy_admin/module_home/home_routes.dart';
+import 'package:trafficy_admin/module_main/main_routes.dart';
 import 'package:trafficy_admin/module_splash/splash_routes.dart';
 import 'package:trafficy_admin/utils/effect/hidder.dart';
 import 'package:trafficy_admin/utils/images/images.dart';
@@ -65,10 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool permission = await DeepLinksService.checkPermission();
     if (permission == false) return SplashRoutes.BlOCK_SCREEN;
     if (widget._authService.isLoggedIn) {
-      if (getIt<AuthPrefsHelper>().isCalibrated()) {
-        return HomeRoutes.HOME_SCREEN;
-      }
-      return HomeRoutes.CALIBRATION_SCREEN;
+      return MainRoutes.MAIN_SCREEN;
     }
     return AuthorizationRoutes.LOGIN_SCREEN;
   }

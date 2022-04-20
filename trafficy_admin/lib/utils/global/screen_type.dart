@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
 
 class ScreenType {
@@ -20,9 +19,8 @@ class ScreenType {
     }
   }
 
-  static bool isMobile() {
-    var screenSize =
-        MediaQuery.of(GlobalVariable.navState.currentContext!).size;
+  static bool isMobile(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     if (screenSize.width < 600) {
       return true;
     } else {
@@ -30,9 +28,8 @@ class ScreenType {
     }
   }
 
-  static bool isDesktop() {
-    var screenSize =
-        MediaQuery.of(GlobalVariable.navState.currentContext!).size;
+  static bool isDesktop(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     if (screenSize.width >= 1200) {
       return true;
     } else {
@@ -40,9 +37,8 @@ class ScreenType {
     }
   }
 
-  static bool isTablet() {
-    var screenSize =
-        MediaQuery.of(GlobalVariable.navState.currentContext!).size;
+  static bool isTablet(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     if (screenSize.width > 600 && screenSize.width < 1200) {
       return true;
     } else {

@@ -8,6 +8,7 @@
 // ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
 // ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
 // ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
@@ -180,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حدث خطأ عند رفع الصور!!"),
         "exceededAllowedTime": MessageLookupByLibrary.simpleMessage(
             "لقد تجاوزت الوقت المسموح لإزالة الطلب"),
+        "exitWarning": MessageLookupByLibrary.simpleMessage(
+            "اضغط مرة اخرى للخروج من التطبيق"),
         "externalOrder": MessageLookupByLibrary.simpleMessage("طلبية خارجية"),
         "female": MessageLookupByLibrary.simpleMessage("أنثى"),
         "finishOrderProvideDistanceInKm": MessageLookupByLibrary.simpleMessage(
@@ -350,8 +353,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("من فضلك أملئ الحقل"),
         "pleaseCompleteTheForm":
             MessageLookupByLibrary.simpleMessage("الرجاء أكمال الفورم"),
-        "pleaseDownloadtrafficy_admin": MessageLookupByLibrary.simpleMessage(
-            "الرجاء تحميل trafficy_admin"),
+        "pleaseDownloadtrafficy_admin":
+            MessageLookupByLibrary.simpleMessage("الرجاء تحميل trafficy_admin"),
         "pleaseEnterYourEmail": MessageLookupByLibrary.simpleMessage(
             "الرجاء ادخال البريد الالكتروني"),
         "pleaseInputPhoneNumber":

@@ -39,7 +39,7 @@ class AuthService {
         email: username,
         password: password,
       );
-      _prefsHelper.setToken(result.providerToken);
+      _prefsHelper.setToken(result.providerAccessToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
       await getIt<HomeService>().checkCalibration();

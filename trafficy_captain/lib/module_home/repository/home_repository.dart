@@ -44,7 +44,8 @@ class HomeRepository {
       Document result = await database.createDocument(
         read: ['role:all'],
         collectionId: '61e1e753eafb8',
-        data: request.toJson(), documentId: const Uuid().v1(),
+        data: request.toJson(),
+        documentId: const Uuid().v1(),
       );
       _logger.info('create Document for collection ${result.$collection}',
           result.data.toString());
@@ -72,20 +73,47 @@ class HomeRepository {
         collectionId: '61e1e753eafb8',
         read: ['role:all'],
         data: request.toJson(),
-      );
+      ).timeout(Duration(seconds: 1));
       _logger.info('Document updated for collection ${result.$collection}',
           result.data.toString());
       return AsyncSnapshot.withData(ConnectionState.done, result.data);
     } catch (e) {
-      e as AppwriteException;
-      print('=======================================================');
-      print(e.code);
-      print(e.response);
-      print(e.message);
-      print('=======================================================');
+     if (e is AppwriteException) {
+        print('=======================================================');
+        print(e.code);
+        print(e.response);
+        print(e.message);
+        print('=======================================================');
+        _logger.error(
+            e.response.toString(), e.message.toString(), StackTrace.current);
+      }
+      return AsyncSnapshot.withError(ConnectionState.done, e);
+    }
+  }
 
-      _logger.error(
-          e.response.toString(), e.message.toString(), StackTrace.current);
+  Future<AsyncSnapshot> deleteLocation() async {
+    var document = getIt<HomeHiveHelper>().getDocumentID();
+    var database = await _appwriteApi.getDataBase();
+    try {
+      _logger.info('Request for delete Location document $document', '');
+      Document result = await database.deleteDocument(
+        documentId: document ?? '-1',
+        collectionId: '61e1e753eafb8',
+      );
+      _logger.info('Document delete for collection ${result.$collection}',
+          result.data.toString());
+      await HomeHiveHelper().clean();
+      return AsyncSnapshot.withData(ConnectionState.done, result.data);
+    } catch (e) {
+      if (e is AppwriteException) {
+        print('=======================================================');
+        print(e.code);
+        print(e.response);
+        print(e.message);
+        print('=======================================================');
+        _logger.error(
+            e.response.toString(), e.message.toString(), StackTrace.current);
+      }
       return AsyncSnapshot.withError(ConnectionState.done, e);
     }
   }

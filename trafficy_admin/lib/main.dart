@@ -9,8 +9,8 @@ import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/hive/hive_init.dart';
 import 'package:trafficy_admin/module_auth/authoriazation_module.dart';
 import 'package:trafficy_admin/module_chat/chat_module.dart';
-import 'package:trafficy_admin/module_home/home_module.dart';
 import 'package:trafficy_admin/module_localization/service/localization_service/localization_service.dart';
+import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
 import 'package:trafficy_admin/module_splash/splash_module.dart';
 import 'package:trafficy_admin/module_theme/service/theme_service/theme_service.dart';
@@ -22,6 +22,7 @@ import 'generated/l10n.dart';
 import 'module_splash/splash_routes.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:feature_discovery/feature_discovery.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   timeago.setLocaleMessages('ar', timeago.ArMessages());
@@ -52,16 +53,16 @@ class MyApp extends StatefulWidget {
   final AuthorizationModule _authorizationModule;
   final SettingsModule _settingsModule;
   final ChatModule _chatModule;
-  final HomeModule _homeModule;
-
+  final MainModule _mainModule;
   const MyApp(
-      this._themeDataService,
-      this._localizationService,
-      this._splashModule,
-      this._authorizationModule,
-      this._chatModule,
-      this._settingsModule,
-      this._homeModule);
+    this._themeDataService,
+    this._localizationService,
+    this._splashModule,
+    this._authorizationModule,
+    this._chatModule,
+    this._settingsModule,
+    this._mainModule
+  );
 
   @override
   State<StatefulWidget> createState() => _MyAppState();

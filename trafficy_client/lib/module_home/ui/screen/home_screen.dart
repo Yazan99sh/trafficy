@@ -83,7 +83,7 @@ class HomeScreenState extends State<HomeScreen> {
 
     // Geo Locator work service
     var options = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 10);
+        accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 100);
     Geolocator.getPositionStream(locationSettings: options).listen((position) {
       var speedInMps = position.speed;
       speedInKm = speedInMps * (18 / 5);

@@ -11,6 +11,7 @@ import 'package:trafficy_captain/module_auth/presistance/auth_prefs_helper.dart'
 import 'package:trafficy_captain/module_auth/request/register_request/register_request.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:trafficy_captain/module_auth/response/regester_response/regester_response.dart';
+import 'package:trafficy_captain/module_home/hive/home_hive_helper.dart';
 import 'package:trafficy_captain/utils/helpers/status_code_helper.dart';
 import 'package:trafficy_captain/utils/logger/logger.dart';
 
@@ -40,7 +41,7 @@ class AuthService {
         email: username,
         password: password,
       );
-      _prefsHelper.setToken(result.providerToken);
+      _prefsHelper.setToken(result.providerAccessToken);
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
       _authSubject.add(AuthStatus.AUTHORIZED);
@@ -112,5 +113,6 @@ class AuthService {
     var account = await getIt<AppwriteApi>().getAccount();
     account.deleteSessions();
     await _prefsHelper.cleanAll();
+    await HomeHiveHelper().clean();
   }
 }
