@@ -3849,6 +3849,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Registration date`
+  String get registerDate {
+    return Intl.message(
+      'Registration date',
+      name: 'registerDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

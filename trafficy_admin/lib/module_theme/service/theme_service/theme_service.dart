@@ -18,57 +18,76 @@ class AppThemeDataService {
 
   AppThemeDataService(this._preferencesHelper);
 
-  static Color get primaryColor {
+  static Color get PrimaryColor {
     return Colors.purple;
-  }
-
-  static Color get primaryDarker {
-    return Colors.purple;
-  }
-
-  static Color get accentColor {
-    return Colors.purpleAccent;
   }
 
   ThemeData getActiveTheme() {
     var dark = _preferencesHelper.isDarkMode();
+    final lightScheme = ColorScheme.fromSeed(seedColor: PrimaryColor);
+    final darkScheme = ColorScheme.fromSeed(
+        seedColor: PrimaryColor,
+        brightness: Brightness.dark,
+        error: Colors.red[900],
+        errorContainer: Colors.red[100],
+        );
     if (dark == true) {
       mapStyle(dark);
       return ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: primaryColor,
-        primaryColorDark: primaryDarker,
-        focusColor: primaryColor,
-        fontFamily: getIt<LocalizationService>().getLanguage() == 'ar'
-            ? GoogleFonts.balooBhai().fontFamily
-            : GoogleFonts.ubuntu().fontFamily,
-        backgroundColor: const Color.fromRGBO(36, 34, 38, 1),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: accentColor, brightness: Brightness.dark),
-      );
+          brightness: Brightness.dark,
+          colorScheme: darkScheme,
+          useMaterial3: true,
+          focusColor: PrimaryColor,
+          checkboxTheme: CheckboxThemeData(
+            checkColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              const Set<MaterialState> interactiveStates = <MaterialState>{
+                MaterialState.pressed,
+                MaterialState.hovered,
+                MaterialState.focused,
+              };
+              if (states.any(interactiveStates.contains)) {
+                return Colors.grey;
+              }
+              return Colors.white;
+            }),
+            fillColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              const Set<MaterialState> interactiveStates = <MaterialState>{
+                MaterialState.pressed,
+                MaterialState.hovered,
+                MaterialState.focused,
+              };
+              if (states.any(interactiveStates.contains)) {
+                return Colors.black;
+              }
+              return Colors.indigo;
+            }),
+          ),
+          cardColor: Colors.grey[150],
+          fontFamily: GoogleFonts.cairo().fontFamily,
+          textTheme: const TextTheme(
+            button: TextStyle(
+              color: Colors.white,
+            ),
+          ));
     }
     mapStyle(dark);
     return ThemeData(
         brightness: Brightness.light,
-        primaryColor: primaryColor,
-        primaryColorDark: primaryDarker,
-        focusColor: primaryColor,
+        colorScheme: lightScheme,
+        useMaterial3: true,
+        focusColor: PrimaryColor,
+        primarySwatch: Colors.purple,
         cardColor: const Color.fromRGBO(245, 245, 245, 1),
-        // const Color.fromRGBO(236, 239, 241, 1)
-        backgroundColor: const Color.fromRGBO(246, 235, 255, 1),
-        fontFamily: getIt<LocalizationService>().getLanguage() == 'ar'
-            ? GoogleFonts.balooBhai().fontFamily
-            : GoogleFonts.ubuntu().fontFamily,
-        iconTheme: const IconThemeData(
-          color: Color.fromRGBO(246, 235, 255, 1),
-        ),
+        backgroundColor: const Color.fromRGBO(236, 239, 241, 1),
+        textTheme: const TextTheme(button: TextStyle(color: Colors.white)),
+        fontFamily: GoogleFonts.cairo().fontFamily,
         timePickerTheme: const TimePickerThemeData(
           dialBackgroundColor: Color.fromRGBO(235, 235, 235, 1),
           dayPeriodBorderSide:
               BorderSide(color: Color.fromRGBO(235, 235, 235, 1)),
-        ),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: accentColor));
+        ));
   }
 
   void switchDarkMode(bool darkMode) async {

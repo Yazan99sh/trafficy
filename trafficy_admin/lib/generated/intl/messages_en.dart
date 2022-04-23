@@ -421,6 +421,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Recipient Phone Number"),
         "refresh": MessageLookupByLibrary.simpleMessage("refresh"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "registerDate":
+            MessageLookupByLibrary.simpleMessage("Registration date"),
         "registerHint":
             MessageLookupByLibrary.simpleMessage("username or phone number"),
         "registerSuccess": MessageLookupByLibrary.simpleMessage(

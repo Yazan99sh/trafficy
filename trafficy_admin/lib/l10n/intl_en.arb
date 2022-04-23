@@ -379,7 +379,9 @@
     "clients": "Clients",
     "captains": "Captains",
     "update": "Update",
-    "delete": "Delete"
+    "delete": "Delete",
+    "registerDate": "Registration date"
+
 
 
 }

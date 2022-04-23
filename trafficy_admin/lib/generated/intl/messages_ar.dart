@@ -412,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رقم هاتف المستلم"),
         "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
         "register": MessageLookupByLibrary.simpleMessage("انشاء حساب جديد"),
+        "registerDate": MessageLookupByLibrary.simpleMessage("تاريخ الإنضمام"),
         "registerHint":
             MessageLookupByLibrary.simpleMessage("اسم مستخدم أو رقم هاتف"),
         "registerSuccess":
