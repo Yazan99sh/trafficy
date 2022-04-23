@@ -1,47 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:trafficy_admin/abstracts/states/state.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
+import 'package:trafficy_admin/module_main/model/users_models.dart';
 import 'package:trafficy_admin/module_main/sceen/home_screen.dart';
 import 'package:trafficy_admin/module_main/widget/animation.dart';
-import 'package:trafficy_admin/utils/components/empty_screen.dart';
-import 'package:trafficy_admin/utils/components/error_screen.dart';
 import 'package:trafficy_admin/utils/global/screen_type.dart';
 
 class HomeLoadedState extends States {
   final HomeScreenState screenState;
-  final String? error;
-  final bool empty;
-
-  HomeLoadedState(this.screenState,
-      {this.empty = false, this.error})
-      : super(screenState);
+  UsersModel usersModel;
+  HomeLoadedState(this.screenState, this.usersModel) : super(screenState);
 
   String? id;
 
   @override
   Widget getUI(BuildContext context) {
-    if (error != null) {
-      return ErrorStateWidget(
-        onRefresh: () {
-          screenState.getReport();
-        },
-        error: error,
-      );
-    } else if (empty) {
-      return EmptyStateWidget(
-          empty: S.current.homeDataEmpty,
-          onRefresh: () {
-            screenState.getReport();
-          });
-    }
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       child: SizedBox(
-        child: Wrap(
-            alignment: WrapAlignment.center,
-            direction: Axis.horizontal,
-            children: const [
-            ]),
+        height: MediaQuery.of(context).size.height-16,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+          widgetTile(usersModel.captainsCount.toString(), S.current.captains),
+          Divider(
+            color: Theme.of(context).backgroundColor,
+            thickness: 2.5,
+          ),
+          widgetTile(usersModel.clientsCount.toString(), S.current.clients),
+        ]),
       ),
     );
   }

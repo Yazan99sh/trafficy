@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:list_tile_switch/list_tile_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
+import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/module_auth/authorization_routes.dart';
 import 'package:trafficy_admin/module_auth/service/auth_service/auth_service.dart';
 import 'package:trafficy_admin/module_localization/service/localization_service/localization_service.dart';
@@ -33,8 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Trafficy.appBar(context,
-          title: S.of(context).settings,
-          buttonBackground: Theme.of(context).backgroundColor),
+          title: S.of(context).settings, icon: Icons.menu, onTap: () {
+        GlobalVariable.mainScreenScaffold.currentState?.openDrawer();
+      }, buttonBackground: Theme.of(context).backgroundColor),
       body: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
         child: ListView(

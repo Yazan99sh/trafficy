@@ -68,6 +68,6 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   void getReport() {
-  
+    widget._stateManager.getUsers(this);
   }
 }

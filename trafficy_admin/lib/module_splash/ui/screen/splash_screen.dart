@@ -9,6 +9,7 @@ import 'package:trafficy_admin/module_auth/service/auth_service/auth_service.dar
 import 'package:trafficy_admin/module_deep_links/service/deep_links_service.dart';
 import 'package:trafficy_admin/module_main/main_routes.dart';
 import 'package:trafficy_admin/module_splash/splash_routes.dart';
+import 'package:trafficy_admin/utils/components/fixed_container.dart';
 import 'package:trafficy_admin/utils/effect/hidder.dart';
 import 'package:trafficy_admin/utils/images/images.dart';
 import 'package:flutter/material.dart';
@@ -40,24 +41,26 @@ class _SplashScreenState extends State<SplashScreen> {
     client.setEndpoint(Urls.APPWRITE_ENDPOINT);
     client.setProject(Urls.APPWRITE_PROJECTID);
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Hider(
-          active: false,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Image.asset(
-              ImageAsset.TRAFFICY_LOGO,
-              height: 150,
-              width: 150,
+        body: FixedContainer(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+          Hider(
+            active: false,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Image.asset(
+                ImageAsset.TRAFFICY_LOGO,
+                height: 150,
+                width: 150,
+              ),
             ),
           ),
-        ),
-        Lottie.asset(LottieAsset.SPLASH_SCREEN),
-        SizedBox(height: 150, child: Lottie.asset(LottieAsset.LOADING_SCREEN)),
-      ],
-    ));
+          Lottie.asset(LottieAsset.SPLASH_SCREEN),
+          SizedBox(height: 150, child: Lottie.asset(LottieAsset.LOADING_SCREEN)),
+              ],
+            ),
+        ));
   }
 
   Future<String> _getNextRoute() async {

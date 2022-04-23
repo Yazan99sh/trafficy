@@ -8,6 +8,7 @@ import 'package:trafficy_admin/di/di_config.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/hive/hive_init.dart';
 import 'package:trafficy_admin/module_auth/authoriazation_module.dart';
+import 'package:trafficy_admin/module_captain/captains_module.dart';
 import 'package:trafficy_admin/module_chat/chat_module.dart';
 import 'package:trafficy_admin/module_localization/service/localization_service/localization_service.dart';
 import 'package:trafficy_admin/module_main/main_module.dart';
@@ -54,15 +55,17 @@ class MyApp extends StatefulWidget {
   final SettingsModule _settingsModule;
   final ChatModule _chatModule;
   final MainModule _mainModule;
+  final CaptainsModule _captainsModule;
   const MyApp(
-    this._themeDataService,
-    this._localizationService,
-    this._splashModule,
-    this._authorizationModule,
-    this._chatModule,
-    this._settingsModule,
-    this._mainModule
-  );
+      this._themeDataService,
+      this._localizationService,
+      this._splashModule,
+      this._authorizationModule,
+      this._chatModule,
+      this._settingsModule,
+      this._mainModule,
+      this._captainsModule
+      );
 
   @override
   State<StatefulWidget> createState() => _MyAppState();

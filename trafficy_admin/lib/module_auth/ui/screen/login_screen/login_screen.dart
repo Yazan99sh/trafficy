@@ -90,10 +90,8 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    if (getIt<AuthPrefsHelper>().isCalibrated()) {
       Navigator.of(context)
           .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
-    }
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)
         .show(context);

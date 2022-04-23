@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trafficy_admin/di/di_config.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
+import 'package:trafficy_admin/module_captain/captains_module.dart';
 import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
 import 'package:trafficy_admin/utils/components/custom_list_view.dart';
@@ -28,14 +29,15 @@ class _NavigatorMenuState extends State<NavigatorMenu> {
   @override
   Widget build(BuildContext context) {
     var drawerHeader = SizedBox(
-//      height: 160,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image.asset(ImageAsset.BUS)),
+            child: Center(
+                child: Image.asset(
+              ImageAsset.BUS,
+              width: 75,
+            )),
           ),
           const SizedBox(
             height: 16,
@@ -55,6 +57,8 @@ class _NavigatorMenuState extends State<NavigatorMenu> {
             drawerHeader,
             customListTile(getIt<MainModule>().homeScreen, S.current.home,
                 FontAwesomeIcons.home),
+            customListTile(getIt<CaptainsModule>().captainsScreen,
+                S.current.captains, FontAwesomeIcons.motorcycle),
             customListTile(getIt<SettingsModule>().settingsScreen,
                 S.current.settings, FontAwesomeIcons.cog),
           ])),

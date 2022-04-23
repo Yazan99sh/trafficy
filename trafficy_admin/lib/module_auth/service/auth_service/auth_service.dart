@@ -9,6 +9,7 @@ import 'package:trafficy_admin/module_auth/manager/auth_manager/auth_manager.dar
 import 'package:trafficy_admin/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:trafficy_admin/module_auth/request/register_request/register_request.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:trafficy_admin/utils/helpers/date_converter.dart';
 import 'package:trafficy_admin/utils/helpers/status_code_helper.dart';
 import 'package:trafficy_admin/utils/logger/logger.dart';
 
@@ -38,9 +39,10 @@ class AuthService {
         email: username,
         password: password,
       );
-      _prefsHelper.setToken(result.providerToken);
+
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
+      _prefsHelper.setSession(result.$id);
       _authSubject.add(AuthStatus.AUTHORIZED);
     } catch (e) {
       if (e is AppwriteException) {
@@ -60,20 +62,25 @@ class AuthService {
 
   Future<void> registerApi(RegisterRequest request) async {}
 
-  Future<String?> getToken() async {
+  Future<String?> refreshToken() async {
     try {
-      var tokenDate = _prefsHelper.getTokenDate();
-      var diff = DateTime.now().difference(tokenDate).inMinutes;
-      if (diff.abs() > 55) {
-        throw TokenExpiredException('Token is created $diff minutes ago');
+      var account = await getIt<AppwriteApi>().getAccount();
+      var session =
+          await account.getSession(sessionId: _prefsHelper.getSession() ?? '');
+      if (DateTime.now().isAfter(DateHelper.convert(session.expire))) {
+        throw const AuthorizationException('Session Ended');
       }
-      return _prefsHelper.getToken();
+      if (DateTime.now()
+          .isAfter(DateHelper.convert(session.providerAccessTokenExpiry))) {
+        throw const TokenExpiredException('Token Ended');
+      }
+      return session.providerAccessToken;
     } on AuthorizationException {
-      _prefsHelper.deleteToken();
+      await _prefsHelper.cleanAll();
       return null;
     } on TokenExpiredException {
-      await refreshToken();
-      return _prefsHelper.getToken();
+      await refreshSession();
+      return null;
     } catch (e) {
       await _prefsHelper.cleanAll();
       return null;
@@ -81,7 +88,7 @@ class AuthService {
   }
 
   /// refresh API token, this is done using Firebase Token Refresh
-  Future<void> refreshToken() async {
+  Future<void> refreshSession() async {
     String? username = _prefsHelper.getUsername();
     String? password = _prefsHelper.getPassword();
     if (username == null || password == null) {

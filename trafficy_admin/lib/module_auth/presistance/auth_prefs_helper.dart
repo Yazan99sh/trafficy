@@ -61,11 +61,21 @@ class AuthPrefsHelper {
   void setToken(String? token) {
     if (token != null) {
       box.put('token', token);
-      box.put(
-        'token_date',
-        DateTime.now().toIso8601String(),
-      );
     }
+  }
+
+  void setTokenDate(String date) {
+    box.put(
+      'token_date',
+      date,
+    );
+  }
+
+  void setSession(String id) {
+    box.put(
+      'sessionId',
+      id,
+    );
   }
 
   void deleteToken() {
@@ -85,6 +95,11 @@ class AuthPrefsHelper {
       throw AuthorizationException('Token not found');
     }
     return token;
+  }
+
+  String? getSession() {
+    var sessionID = box.get('sessionId');
+    return sessionID;
   }
 
   /// @return DateTime tokenDate
