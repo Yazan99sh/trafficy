@@ -5,6 +5,7 @@ import 'package:trafficy_admin/abstracts/states/state.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/module_captain/state_manager/captains_state_manager.dart';
+import 'package:trafficy_admin/module_captain/widget/create_captain_form.dart';
 import 'package:trafficy_admin/utils/components/custom_app_bar.dart';
 import 'package:trafficy_admin/utils/images/images.dart';
 
@@ -43,6 +44,27 @@ class CaptainsScreenState extends State<CaptainsScreen> {
           state.getUI(context)
         ],
       ),
+      floatingActionButton: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+        ),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return CreateCaptainForm(create: (request) { 
+
+                  },);
+                });
+          },
+          icon: Padding(
+            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
+            child: const Icon(Icons.add_rounded),
+          ),
+          label: Padding(
+            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
+            child: Text(S.current.createNewCaptain),
+          )),
     );
   }
 
