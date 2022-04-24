@@ -4,6 +4,7 @@ import 'package:trafficy_admin/di/di_config.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/module_captain/captains_module.dart';
+import 'package:trafficy_admin/module_clients/clients_module.dart';
 import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
 import 'package:trafficy_admin/utils/components/custom_list_view.dart';
@@ -59,6 +60,8 @@ class _NavigatorMenuState extends State<NavigatorMenu> {
                 FontAwesomeIcons.home),
             customListTile(getIt<CaptainsModule>().captainsScreen,
                 S.current.captains, FontAwesomeIcons.motorcycle),
+            customListTile(getIt<ClientsModule>().clientsScreen,
+                S.current.clients, Icons.people_alt_rounded),
             customListTile(getIt<SettingsModule>().settingsScreen,
                 S.current.settings, FontAwesomeIcons.cog),
           ])),

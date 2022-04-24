@@ -10,6 +10,7 @@ import 'package:trafficy_admin/hive/hive_init.dart';
 import 'package:trafficy_admin/module_auth/authoriazation_module.dart';
 import 'package:trafficy_admin/module_captain/captains_module.dart';
 import 'package:trafficy_admin/module_chat/chat_module.dart';
+import 'package:trafficy_admin/module_clients/clients_module.dart';
 import 'package:trafficy_admin/module_localization/service/localization_service/localization_service.dart';
 import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatefulWidget {
   final ChatModule _chatModule;
   final MainModule _mainModule;
   final CaptainsModule _captainsModule;
+  final ClientsModule _clientsModule;
   const MyApp(
       this._themeDataService,
       this._localizationService,
@@ -64,7 +66,8 @@ class MyApp extends StatefulWidget {
       this._chatModule,
       this._settingsModule,
       this._mainModule,
-      this._captainsModule
+      this._captainsModule,
+      this._clientsModule
       );
 
   @override
