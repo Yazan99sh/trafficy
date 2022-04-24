@@ -380,7 +380,9 @@
     "captains": "Captains",
     "update": "Update",
     "delete": "Delete",
-    "registerDate": "Registration date"
+    "registerDate": "Registration date",
+    "createNewCaptain": "Create new captain",
+    "create": "Create"
 
 
 

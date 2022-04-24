@@ -380,7 +380,10 @@
     "captains": "السائقون",
     "update": "تحديث",
     "delete": "حذف",
-    "registerDate": "تاريخ الإنضمام"
+    "registerDate": "تاريخ الإنضمام",
+    "createNewCaptain": "إنشاء حساب",
+    "create": "إنشاء"
+
 
 
 

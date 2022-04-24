@@ -3859,6 +3859,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Create new captain`
+  String get createNewCaptain {
+    return Intl.message(
+      'Create new captain',
+      name: 'createNewCaptain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
