@@ -382,7 +382,9 @@
     "delete": "Delete",
     "registerDate": "Registration date",
     "createNewCaptain": "Create new captain",
-    "create": "Create"
+    "create": "Create",
+    "accountCreatedSuccessfully": "Account created successfully"
+
 
 
 

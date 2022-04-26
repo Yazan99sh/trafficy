@@ -382,7 +382,8 @@
     "delete": "حذف",
     "registerDate": "تاريخ الإنضمام",
     "createNewCaptain": "إنشاء حساب",
-    "create": "إنشاء"
+    "create": "إنشاء",
+    "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح"
 
 
 

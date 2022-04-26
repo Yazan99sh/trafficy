@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "لا يمكنك تسجيل هذا الحساب لوجوده مسبقا"),
         "accountCreated":
             MessageLookupByLibrary.simpleMessage("تم ارسال الطلب"),
+        "accountCreatedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم إنشاء الحساب بنجاح"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("رقم حساب البنك"),
         "activeCars": MessageLookupByLibrary.simpleMessage("السيارات المشغولة"),
         "activePlan": MessageLookupByLibrary.simpleMessage("الباقة الحالية"),

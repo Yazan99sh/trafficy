@@ -35,6 +35,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("This account already exist"),
         "accountCreated":
             MessageLookupByLibrary.simpleMessage("Account Created"),
+        "accountCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Account created successfully"),
         "accountNumber": MessageLookupByLibrary.simpleMessage("Account Number"),
         "activeCars": MessageLookupByLibrary.simpleMessage("Active Cars"),
         "activePlan": MessageLookupByLibrary.simpleMessage("Active Plan"),
