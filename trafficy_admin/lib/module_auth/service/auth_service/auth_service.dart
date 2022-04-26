@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:injectable/injectable.dart';
@@ -39,7 +41,6 @@ class AuthService {
         email: username,
         password: password,
       );
-
       _prefsHelper.setUsername(username);
       _prefsHelper.setPassword(password);
       _prefsHelper.setSession(result.$id);
@@ -68,12 +69,13 @@ class AuthService {
       var session =
           await account.getSession(sessionId: _prefsHelper.getSession() ?? '');
       if (DateTime.now().isAfter(DateHelper.convert(session.expire))) {
-        throw const AuthorizationException('Session Ended');
+       throw const AuthorizationException('Session Ended');
       }
-      if (DateTime.now()
-          .isAfter(DateHelper.convert(session.providerAccessTokenExpiry))) {
-        throw const TokenExpiredException('Token Ended');
-      }
+      log(DateHelper.convert(session.expire).toIso8601String());
+      // if (DateTime.now()
+      //     .isAfter(DateHelper.convert(session.providerAccessTokenExpiry))) {
+      //   throw const TokenExpiredException('Token Ended');
+      // }
       return session.providerAccessToken;
     } on AuthorizationException {
       await _prefsHelper.cleanAll();

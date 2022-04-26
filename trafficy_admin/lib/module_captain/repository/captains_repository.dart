@@ -20,7 +20,6 @@ class CaptainsRepository {
   Future<AsyncSnapshot> createCaptainRequest(
       CreateCaptainAccount request) async {
     try {
-      await _authService.refreshSession();
       Account account = _appwriteApi.getAccount();
       var result = await account.create(
           userId: Uuid().v1(),

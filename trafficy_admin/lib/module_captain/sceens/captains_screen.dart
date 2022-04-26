@@ -45,24 +45,26 @@ class CaptainsScreenState extends State<CaptainsScreen> {
         ],
       ),
       floatingActionButton: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
-        ),
+          style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+          ),
           onPressed: () {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return CreateCaptainForm(create: (request) { 
-
-                  },);
+                  return CreateCaptainForm(
+                    create: (request) {
+                      widget._stateManager.createCaptainAccount(this, request);
+                    },
+                  );
                 });
           },
-          icon: Padding(
-            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
-            child: const Icon(Icons.add_rounded),
+          icon: const Padding(
+            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: Icon(Icons.add_rounded),
           ),
           label: Padding(
-            padding: const EdgeInsets.only(top:8.0,bottom: 8.0),
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
             child: Text(S.current.createNewCaptain),
           )),
     );

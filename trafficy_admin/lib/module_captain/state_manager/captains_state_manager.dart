@@ -11,6 +11,7 @@ import 'package:trafficy_admin/module_captain/service/captains_service.dart';
 import 'package:trafficy_admin/module_captain/states/captains_loaded_state.dart';
 import 'package:trafficy_admin/module_main/model/users_models.dart';
 import 'package:trafficy_admin/module_main/service/home_service.dart';
+import 'package:trafficy_admin/utils/helpers/custom_flushbar.dart';
 
 @injectable
 class CaptainsStateManager {
@@ -46,13 +47,17 @@ class CaptainsStateManager {
     _captainsService.createCaptainAccount(request).then((value) {
       if (value.hasError) {
         getUsers(screenState);
-        // flush bar
-      } else if (value.isEmpty) {
-        getUsers(screenState);
+        CustomFlushBarHelper.createError(
+                title: S.current.warnning, message: value.error ?? '')
+            .show(screenState.context);
         // flush bar
       } else {
         getUsers(screenState);
         // flush bar
+        CustomFlushBarHelper.createSuccess(
+                title: S.current.warnning,
+                message: S.current.accountCreatedSuccessfully)
+            .show(screenState.context);
       }
     });
   }

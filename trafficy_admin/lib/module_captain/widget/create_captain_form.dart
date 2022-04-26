@@ -1,6 +1,7 @@
 import 'package:dart_appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
+import 'package:trafficy_admin/module_auth/ui/widget/login_widgets/custom_field.dart';
 import 'package:trafficy_admin/module_captain/request/create_captain_account.dart';
 import 'package:trafficy_admin/utils/components/custom_app_bar.dart';
 import 'package:trafficy_admin/utils/components/custom_feild.dart';
@@ -79,12 +80,14 @@ class _CreateCaptainFormState extends State<CreateCaptainForm> {
                         hintText: S.current.pleaseEnterYourEmail,
                       ),
                     ),
-                    const SizedBox(width: 8,),
+                    const SizedBox(
+                      width: 8,
+                    ),
                     Expanded(
                       child: CustomFormField(
                         readOnly: true,
                         controller: captainController,
-                        hintText:'',
+                        hintText: '',
                       ),
                     ),
                   ],
@@ -92,7 +95,8 @@ class _CreateCaptainFormState extends State<CreateCaptainForm> {
               ),
               ListTile(
                 title: Text(S.current.password),
-                subtitle: CustomFormField(
+                subtitle: CustomLoginFormField(
+                  password: true,
                   controller: passwordController,
                   hintText: S.current.password,
                 ),
@@ -113,7 +117,10 @@ class _CreateCaptainFormState extends State<CreateCaptainForm> {
                           if (key.currentState?.validate() == true) {
                             Navigator.of(context).pop();
                             widget.create(CreateCaptainAccount(
-                                email: '', name: '', password: ''));
+                                email: emailController.text +
+                                    captainController.text,
+                                name: nameController.text,
+                                password: passwordController.text));
                           }
                         },
                         child: Padding(
