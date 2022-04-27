@@ -51,7 +51,8 @@ class ClientsLoadedState extends States {
                       child: CircleAvatar(
                         child: Text(element.name[0]),
                         foregroundColor: Theme.of(context).colorScheme.primary,
-                        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryContainer,
                       ),
                     ),
                     Expanded(
@@ -87,6 +88,7 @@ class ClientsLoadedState extends States {
                 ))),
       ));
     });
+    widgets.add(const SizedBox(height: 75,));
     return widgets;
   }
 
