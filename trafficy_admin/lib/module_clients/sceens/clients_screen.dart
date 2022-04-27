@@ -5,6 +5,7 @@ import 'package:trafficy_admin/abstracts/states/state.dart';
 import 'package:trafficy_admin/generated/l10n.dart';
 import 'package:trafficy_admin/global_nav_key.dart';
 import 'package:trafficy_admin/module_clients/state_manager/clients_state_manager.dart';
+import 'package:trafficy_admin/module_clients/widget/create_client_form.dart';
 import 'package:trafficy_admin/utils/components/custom_app_bar.dart';
 import 'package:trafficy_admin/utils/images/images.dart';
 
@@ -43,6 +44,30 @@ class ClientsScreenState extends State<ClientsScreen> {
           state.getUI(context)
         ],
       ),
+       floatingActionButton: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+          ),
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return CreateClientForm(
+                    create: (request) {
+                      widget._stateManager.createCaptainAccount(this, request);
+                    },
+                  );
+                });
+          },
+          icon: const Padding(
+            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: Icon(Icons.add_rounded),
+          ),
+          label: Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: Text(S.current.createNewClient),
+          )),
+    
     );
   }
 
