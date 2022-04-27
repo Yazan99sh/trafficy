@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createNewCaptain":
             MessageLookupByLibrary.simpleMessage("Create new captain"),
+        "createNewClient":
+            MessageLookupByLibrary.simpleMessage("Create new client"),
         "createNewOrder":
             MessageLookupByLibrary.simpleMessage("Create new order"),
         "createNewReport":

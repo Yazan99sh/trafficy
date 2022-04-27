@@ -383,7 +383,8 @@
     "registerDate": "تاريخ الإنضمام",
     "createNewCaptain": "إنشاء حساب",
     "create": "إنشاء",
-    "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح"
+    "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح",
+    "createNewClient": "إنشاء حساب عميل"
 
 
 

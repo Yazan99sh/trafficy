@@ -3889,6 +3889,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Create new client`
+  String get createNewClient {
+    return Intl.message(
+      'Create new client',
+      name: 'createNewClient',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

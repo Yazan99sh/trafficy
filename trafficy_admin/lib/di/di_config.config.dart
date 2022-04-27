@@ -140,7 +140,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i36.ChatStateManager>(
       () => _i36.ChatStateManager(get<_i35.ChatService>()));
   gh.factory<_i37.ClientsStateManager>(() => _i37.ClientsStateManager(
-      get<_i26.HomeService>(), get<_i21.CaptainsService>()));
+      get<_i26.HomeService>(), get<_i24.ClientsService>()));
   gh.factory<_i38.HomeScreen>(
       () => _i38.HomeScreen(get<_i27.HomeStateManager>()));
   gh.factory<_i39.LoginScreen>(

@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cost": MessageLookupByLibrary.simpleMessage("التكلفة"),
         "create": MessageLookupByLibrary.simpleMessage("إنشاء"),
         "createNewCaptain": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "createNewClient":
+            MessageLookupByLibrary.simpleMessage("إنشاء حساب عميل"),
         "createNewOrder":
             MessageLookupByLibrary.simpleMessage("انشاء طلب جديد "),
         "createNewReport": MessageLookupByLibrary.simpleMessage("دعم سريع"),

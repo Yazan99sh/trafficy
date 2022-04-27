@@ -383,7 +383,9 @@
     "registerDate": "Registration date",
     "createNewCaptain": "Create new captain",
     "create": "Create",
-    "accountCreatedSuccessfully": "Account created successfully"
+    "accountCreatedSuccessfully": "Account created successfully",
+    "createNewClient": "Create new client"
+
 
 
 
