@@ -395,6 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please provide your address on our map"),
         "pleaseSelectABranch":
             MessageLookupByLibrary.simpleMessage("Please Select a Branch"),
+        "preview": MessageLookupByLibrary.simpleMessage("Previewing Map"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "privateOrder": MessageLookupByLibrary.simpleMessage("Private Order"),
         "product": MessageLookupByLibrary.simpleMessage("product"),
@@ -486,6 +487,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortByRate": MessageLookupByLibrary.simpleMessage("highest rate"),
         "specification": MessageLookupByLibrary.simpleMessage("Specification"),
         "startWriting": MessageLookupByLibrary.simpleMessage("Start Writing"),
+        "statistics": MessageLookupByLibrary.simpleMessage("Statistics"),
         "statusCodeBadRequest": MessageLookupByLibrary.simpleMessage(
             "The server could not understand the request due to invalid syntax"),
         "statusCodeCreated": MessageLookupByLibrary.simpleMessage(

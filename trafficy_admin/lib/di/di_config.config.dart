@@ -9,8 +9,8 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../app_write_api.dart' as _i3;
 import '../app_write_dart_api.dart' as _i4;
-import '../main.dart' as _i52;
-import '../module_auth/authoriazation_module.dart' as _i44;
+import '../main.dart' as _i57;
+import '../module_auth/authoriazation_module.dart' as _i47;
 import '../module_auth/manager/auth_manager/auth_manager.dart' as _i18;
 import '../module_auth/presistance/auth_prefs_helper.dart' as _i5;
 import '../module_auth/repository/auth/auth_repository.dart' as _i16;
@@ -19,41 +19,46 @@ import '../module_auth/state_manager/login_state_manager/login_state_manager.dar
     as _i29;
 import '../module_auth/state_manager/register_state_manager/register_state_manager.dart'
     as _i30;
-import '../module_auth/ui/screen/login_screen/login_screen.dart' as _i39;
-import '../module_auth/ui/screen/register_screen/register_screen.dart' as _i41;
-import '../module_captain/captains_module.dart' as _i49;
+import '../module_auth/ui/screen/login_screen/login_screen.dart' as _i41;
+import '../module_auth/ui/screen/register_screen/register_screen.dart' as _i44;
+import '../module_captain/captains_module.dart' as _i54;
 import '../module_captain/repository/captains_repository.dart' as _i20;
-import '../module_captain/sceens/captains_screen.dart' as _i45;
+import '../module_captain/sceens/captains_screen.dart' as _i48;
 import '../module_captain/service/captains_service.dart' as _i21;
-import '../module_captain/state_manager/captains_state_manager.dart' as _i33;
-import '../module_chat/chat_module.dart' as _i50;
-import '../module_chat/manager/chat/chat_manager.dart' as _i34;
+import '../module_captain/state_manager/captains_state_manager.dart' as _i35;
+import '../module_chat/chat_module.dart' as _i55;
+import '../module_chat/manager/chat/chat_manager.dart' as _i36;
 import '../module_chat/presistance/chat_hive_helper.dart' as _i7;
 import '../module_chat/repository/chat/chat_repository.dart' as _i22;
-import '../module_chat/service/chat/char_service.dart' as _i35;
-import '../module_chat/state_manager/chat_state_manager.dart' as _i36;
-import '../module_chat/ui/screens/chat_page/chat_page.dart' as _i46;
-import '../module_clients/clients_module.dart' as _i51;
+import '../module_chat/service/chat/char_service.dart' as _i37;
+import '../module_chat/state_manager/chat_state_manager.dart' as _i38;
+import '../module_chat/ui/screens/chat_page/chat_page.dart' as _i49;
+import '../module_clients/clients_module.dart' as _i56;
 import '../module_clients/repository/clients_repository.dart' as _i23;
-import '../module_clients/sceens/clients_screen.dart' as _i47;
+import '../module_clients/sceens/clients_screen.dart' as _i50;
 import '../module_clients/service/clients_service.dart' as _i24;
-import '../module_clients/state_manager/clients_state_manager.dart' as _i37;
+import '../module_clients/state_manager/clients_state_manager.dart' as _i39;
 import '../module_localization/presistance/localization_preferences_helper/localization_preferences_helper.dart'
     as _i9;
 import '../module_localization/service/localization_service/localization_service.dart'
     as _i10;
-import '../module_main/main_module.dart' as _i48;
+import '../module_main/main_module.dart' as _i51;
 import '../module_main/repository/home_repository.dart' as _i25;
-import '../module_main/sceen/home_screen.dart' as _i38;
-import '../module_main/sceen/main_screen.dart' as _i40;
+import '../module_main/sceen/home_screen.dart' as _i40;
+import '../module_main/sceen/main_screen.dart' as _i42;
 import '../module_main/service/home_service.dart' as _i26;
 import '../module_main/state_manager/home_state_manager.dart' as _i27;
 import '../module_network/http_client/http_client.dart' as _i14;
-import '../module_settings/settings_module.dart' as _i42;
+import '../module_settings/settings_module.dart' as _i45;
 import '../module_settings/ui/settings_page/settings_page.dart' as _i31;
-import '../module_splash/splash_module.dart' as _i43;
+import '../module_splash/splash_module.dart' as _i46;
 import '../module_splash/ui/screen/block_screen.dart' as _i6;
 import '../module_splash/ui/screen/splash_screen.dart' as _i32;
+import '../module_statistics/repository/statistics_repository.dart' as _i33;
+import '../module_statistics/sceens/preview_screen.dart' as _i52;
+import '../module_statistics/service/statisics_service.dart' as _i34;
+import '../module_statistics/state_manager/preview_state_manager.dart' as _i43;
+import '../module_statistics/statistics_module.dart' as _i53;
 import '../module_theme/pressistance/theme_preferences_helper.dart' as _i12;
 import '../module_theme/service/theme_service/theme_service.dart' as _i15;
 import '../module_upload/manager/upload_manager/upload_manager.dart' as _i17;
@@ -132,54 +137,68 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i15.AppThemeDataService>()));
   gh.factory<_i32.SplashScreen>(
       () => _i32.SplashScreen(get<_i19.AuthService>()));
-  gh.factory<_i33.CaptainsStateManager>(() => _i33.CaptainsStateManager(
+  gh.factory<_i33.StatisticsRepository>(() => _i33.StatisticsRepository(
+      get<_i14.ApiClient>(),
+      get<_i3.AppwriteApi>(),
+      get<_i11.Logger>(),
+      get<_i19.AuthService>()));
+  gh.factory<_i34.StatisticsService>(
+      () => _i34.StatisticsService(get<_i33.StatisticsRepository>()));
+  gh.factory<_i35.CaptainsStateManager>(() => _i35.CaptainsStateManager(
       get<_i26.HomeService>(), get<_i21.CaptainsService>()));
-  gh.factory<_i34.ChatManager>(
-      () => _i34.ChatManager(get<_i22.ChatRepository>()));
-  gh.factory<_i35.ChatService>(() => _i35.ChatService(get<_i34.ChatManager>()));
-  gh.factory<_i36.ChatStateManager>(
-      () => _i36.ChatStateManager(get<_i35.ChatService>()));
-  gh.factory<_i37.ClientsStateManager>(() => _i37.ClientsStateManager(
+  gh.factory<_i36.ChatManager>(
+      () => _i36.ChatManager(get<_i22.ChatRepository>()));
+  gh.factory<_i37.ChatService>(() => _i37.ChatService(get<_i36.ChatManager>()));
+  gh.factory<_i38.ChatStateManager>(
+      () => _i38.ChatStateManager(get<_i37.ChatService>()));
+  gh.factory<_i39.ClientsStateManager>(() => _i39.ClientsStateManager(
       get<_i26.HomeService>(), get<_i24.ClientsService>()));
-  gh.factory<_i38.HomeScreen>(
-      () => _i38.HomeScreen(get<_i27.HomeStateManager>()));
-  gh.factory<_i39.LoginScreen>(
-      () => _i39.LoginScreen(get<_i29.LoginStateManager>()));
-  gh.factory<_i40.MainScreen>(() => _i40.MainScreen(get<_i38.HomeScreen>()));
-  gh.factory<_i41.RegisterScreen>(
-      () => _i41.RegisterScreen(get<_i30.RegisterStateManager>()));
-  gh.factory<_i42.SettingsModule>(
-      () => _i42.SettingsModule(get<_i31.SettingsScreen>()));
-  gh.factory<_i43.SplashModule>(() =>
-      _i43.SplashModule(get<_i32.SplashScreen>(), get<_i6.BlockScreen>()));
-  gh.factory<_i44.AuthorizationModule>(() => _i44.AuthorizationModule(
-      get<_i39.LoginScreen>(), get<_i41.RegisterScreen>()));
-  gh.factory<_i45.CaptainsScreen>(
-      () => _i45.CaptainsScreen(get<_i33.CaptainsStateManager>()));
-  gh.factory<_i46.ChatPage>(() => _i46.ChatPage(
-      get<_i36.ChatStateManager>(),
+  gh.factory<_i40.HomeScreen>(
+      () => _i40.HomeScreen(get<_i27.HomeStateManager>()));
+  gh.factory<_i41.LoginScreen>(
+      () => _i41.LoginScreen(get<_i29.LoginStateManager>()));
+  gh.factory<_i42.MainScreen>(() => _i42.MainScreen(get<_i40.HomeScreen>()));
+  gh.factory<_i43.PreviewStateManager>(
+      () => _i43.PreviewStateManager(get<_i34.StatisticsService>()));
+  gh.factory<_i44.RegisterScreen>(
+      () => _i44.RegisterScreen(get<_i30.RegisterStateManager>()));
+  gh.factory<_i45.SettingsModule>(
+      () => _i45.SettingsModule(get<_i31.SettingsScreen>()));
+  gh.factory<_i46.SplashModule>(() =>
+      _i46.SplashModule(get<_i32.SplashScreen>(), get<_i6.BlockScreen>()));
+  gh.factory<_i47.AuthorizationModule>(() => _i47.AuthorizationModule(
+      get<_i41.LoginScreen>(), get<_i44.RegisterScreen>()));
+  gh.factory<_i48.CaptainsScreen>(
+      () => _i48.CaptainsScreen(get<_i35.CaptainsStateManager>()));
+  gh.factory<_i49.ChatPage>(() => _i49.ChatPage(
+      get<_i38.ChatStateManager>(),
       get<_i28.ImageUploadService>(),
       get<_i19.AuthService>(),
       get<_i7.ChatHiveHelper>()));
-  gh.factory<_i47.ClientsScreen>(
-      () => _i47.ClientsScreen(get<_i37.ClientsStateManager>()));
-  gh.factory<_i48.MainModule>(
-      () => _i48.MainModule(get<_i40.MainScreen>(), get<_i38.HomeScreen>()));
-  gh.factory<_i49.CaptainsModule>(
-      () => _i49.CaptainsModule(get<_i45.CaptainsScreen>()));
-  gh.factory<_i50.ChatModule>(
-      () => _i50.ChatModule(get<_i46.ChatPage>(), get<_i19.AuthService>()));
-  gh.factory<_i51.ClientsModule>(
-      () => _i51.ClientsModule(get<_i47.ClientsScreen>()));
-  gh.factory<_i52.MyApp>(() => _i52.MyApp(
+  gh.factory<_i50.ClientsScreen>(
+      () => _i50.ClientsScreen(get<_i39.ClientsStateManager>()));
+  gh.factory<_i51.MainModule>(
+      () => _i51.MainModule(get<_i42.MainScreen>(), get<_i40.HomeScreen>()));
+  gh.factory<_i52.PreviewScreen>(
+      () => _i52.PreviewScreen(get<_i43.PreviewStateManager>()));
+  gh.factory<_i53.StatisticsModule>(
+      () => _i53.StatisticsModule(get<_i52.PreviewScreen>()));
+  gh.factory<_i54.CaptainsModule>(
+      () => _i54.CaptainsModule(get<_i48.CaptainsScreen>()));
+  gh.factory<_i55.ChatModule>(
+      () => _i55.ChatModule(get<_i49.ChatPage>(), get<_i19.AuthService>()));
+  gh.factory<_i56.ClientsModule>(
+      () => _i56.ClientsModule(get<_i50.ClientsScreen>()));
+  gh.factory<_i57.MyApp>(() => _i57.MyApp(
       get<_i15.AppThemeDataService>(),
       get<_i10.LocalizationService>(),
-      get<_i43.SplashModule>(),
-      get<_i44.AuthorizationModule>(),
-      get<_i50.ChatModule>(),
-      get<_i42.SettingsModule>(),
-      get<_i48.MainModule>(),
-      get<_i49.CaptainsModule>(),
-      get<_i51.ClientsModule>()));
+      get<_i46.SplashModule>(),
+      get<_i47.AuthorizationModule>(),
+      get<_i55.ChatModule>(),
+      get<_i45.SettingsModule>(),
+      get<_i51.MainModule>(),
+      get<_i54.CaptainsModule>(),
+      get<_i56.ClientsModule>(),
+      get<_i53.StatisticsModule>()));
   return get;
 }

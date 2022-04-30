@@ -384,7 +384,9 @@
     "createNewCaptain": "إنشاء حساب",
     "create": "إنشاء",
     "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح",
-    "createNewClient": "إنشاء حساب عميل"
+    "createNewClient": "إنشاء حساب عميل",
+    "statistics": "تحليلات",
+    "preview": "استعراض الخريطة"
 
 
 

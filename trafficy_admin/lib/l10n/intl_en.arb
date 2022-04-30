@@ -384,7 +384,11 @@
     "createNewCaptain": "Create new captain",
     "create": "Create",
     "accountCreatedSuccessfully": "Account created successfully",
-    "createNewClient": "Create new client"
+    "createNewClient": "Create new client",
+    "statistics": "Statistics",
+    "preview": "Previewing Map"
+
+
 
 
 

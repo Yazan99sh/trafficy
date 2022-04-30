@@ -7,6 +7,7 @@ import 'package:trafficy_admin/module_captain/captains_module.dart';
 import 'package:trafficy_admin/module_clients/clients_module.dart';
 import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
+import 'package:trafficy_admin/module_statistics/statistics_module.dart';
 import 'package:trafficy_admin/utils/components/custom_list_view.dart';
 import 'package:trafficy_admin/utils/images/images.dart';
 
@@ -62,6 +63,14 @@ class _NavigatorMenuState extends State<NavigatorMenu> {
                 S.current.captains, FontAwesomeIcons.motorcycle),
             customListTile(getIt<ClientsModule>().clientsScreen,
                 S.current.clients, Icons.people_alt_rounded),
+            customExpansionTile(
+                children: [
+                  customListTile(getIt<StatisticsModule>().previewScreen,
+                      S.current.preview, FontAwesomeIcons.map, true),
+                ],
+                icon: Icons.bar_chart_rounded,
+                page: widget.currentPage,
+                title: S.current.statistics),
             customListTile(getIt<SettingsModule>().settingsScreen,
                 S.current.settings, FontAwesomeIcons.cog),
           ])),
@@ -109,21 +118,28 @@ class _NavigatorMenuState extends State<NavigatorMenu> {
                     Theme.of(context).colorScheme.primary,
                   ])
                 : null),
-        child: ListTile(
-          minLeadingWidth: subtitle ? 4 : null,
-          visualDensity: VisualDensity(vertical: -2),
-          onTap: () {
-            widget.onTap(page);
-            GlobalVariable.mainScreenScaffold.currentState?.openEndDrawer();
-            setState(() {});
-          },
-          leading:
-              Icon(icon, color: selected ? Colors.white : null, size: size),
-          title: Text(
-            title,
-            style: TextStyle(
-                color: selected ? Colors.white : null,
-                fontSize: subtitle ? 14 : null),
+        child: Material(
+          borderRadius: BorderRadius.circular(25),
+          color: Colors.transparent,
+          child: ListTile(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+            minLeadingWidth: subtitle ? 4 : null,
+            visualDensity: VisualDensity(vertical: -2),
+            onTap: () {
+              widget.onTap(page);
+              GlobalVariable.mainScreenScaffold.currentState?.openEndDrawer();
+              setState(() {});
+            },
+            leading:
+                Icon(icon, color: selected ? Colors.white : null, size: size),
+            title: Text(
+              title,
+              style: TextStyle(
+                  color: selected ? Colors.white : null,
+                  fontSize: subtitle ? 14 : null),
+            ),
           ),
         ),
       ),

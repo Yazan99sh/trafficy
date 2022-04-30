@@ -15,6 +15,7 @@ import 'package:trafficy_admin/module_localization/service/localization_service/
 import 'package:trafficy_admin/module_main/main_module.dart';
 import 'package:trafficy_admin/module_settings/settings_module.dart';
 import 'package:trafficy_admin/module_splash/splash_module.dart';
+import 'package:trafficy_admin/module_statistics/statistics_module.dart';
 import 'package:trafficy_admin/module_theme/service/theme_service/theme_service.dart';
 import 'package:trafficy_admin/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatefulWidget {
   final MainModule _mainModule;
   final CaptainsModule _captainsModule;
   final ClientsModule _clientsModule;
+  final StatisticsModule _statisticsModule;
   const MyApp(
       this._themeDataService,
       this._localizationService,
@@ -67,7 +69,8 @@ class MyApp extends StatefulWidget {
       this._settingsModule,
       this._mainModule,
       this._captainsModule,
-      this._clientsModule
+      this._clientsModule,
+      this._statisticsModule
       );
 
   @override
