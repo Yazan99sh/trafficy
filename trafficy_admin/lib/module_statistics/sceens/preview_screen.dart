@@ -24,7 +24,7 @@ class PreviewScreenState extends State<PreviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Trafficy.appBar(context,
-            title: S.of(context).home, icon: Icons.menu, onTap: () {
+            title: S.of(context).preview, icon: Icons.menu, onTap: () {
           GlobalVariable.mainScreenScaffold.currentState?.openDrawer();
         }),
         body: state.getUI(context));

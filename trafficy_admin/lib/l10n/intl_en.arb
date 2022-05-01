@@ -386,7 +386,9 @@
     "accountCreatedSuccessfully": "Account created successfully",
     "createNewClient": "Create new client",
     "statistics": "Statistics",
-    "preview": "Previewing Map"
+    "preview": "Previewing Map",
+    "client": "Client"
+
 
 
 

@@ -386,7 +386,8 @@
     "accountCreatedSuccessfully": "تم إنشاء الحساب بنجاح",
     "createNewClient": "إنشاء حساب عميل",
     "statistics": "تحليلات",
-    "preview": "استعراض الخريطة"
+    "preview": "استعراض الخريطة",
+    "client": "عميل"
 
 
 

@@ -105,6 +105,7 @@ dependencies:
   custom_info_window: ^1.0.1
   clippy_flutter: ^2.0.0-nullsafety.1
   flutter_map: ^0.14.0
+  flutter_map_marker_popup: ^2.1.2
 
 
 dev_dependencies:
