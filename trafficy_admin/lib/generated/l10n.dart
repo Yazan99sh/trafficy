@@ -3929,6 +3929,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Account updated successfully`
+  String get accountUpdatedSuccessfully {
+    return Intl.message(
+      'Account updated successfully',
+      name: 'accountUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Captain Profile`
+  String get captainProfile {
+    return Intl.message(
+      'Captain Profile',
+      name: 'captainProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member Since`
+  String get memberSince {
+    return Intl.message(
+      'Member Since',
+      name: 'memberSince',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update password`
+  String get updatePassword {
+    return Intl.message(
+      'Update password',
+      name: 'updatePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last password update date`
+  String get lastPasswordUpdate {
+    return Intl.message(
+      'Last password update date',
+      name: 'lastPasswordUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password updated successfully`
+  String get passwordUpdated {
+    return Intl.message(
+      'Password updated successfully',
+      name: 'passwordUpdated',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

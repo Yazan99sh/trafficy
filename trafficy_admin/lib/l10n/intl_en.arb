@@ -387,7 +387,16 @@
     "createNewClient": "Create new client",
     "statistics": "Statistics",
     "preview": "Previewing Map",
-    "client": "Client"
+    "client": "Client",
+    "accountUpdatedSuccessfully": "Account updated successfully",
+    "captainProfile": "Captain Profile",
+    "memberSince": "Member Since",
+    "updatePassword": "Update password",
+    "lastPasswordUpdate": "Last password update date",
+    "passwordUpdated": "Password updated successfully"
+
+
+
 
 
 

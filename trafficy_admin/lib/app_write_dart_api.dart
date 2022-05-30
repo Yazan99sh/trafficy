@@ -27,6 +27,11 @@ class AppwriteDartApi {
     return users;
   }
 
+  Future<User> getUserById(String id) async {
+    Users users = getUsers();
+    return await users.get(userId: id);
+  }
+
   Future<User> getUser() async {
     var account = getAccount();
     User user = await account.get();

@@ -1,0 +1,4 @@
+enum ArgumentType {
+  ids,
+  object
+}

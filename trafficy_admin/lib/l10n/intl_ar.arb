@@ -387,7 +387,13 @@
     "createNewClient": "إنشاء حساب عميل",
     "statistics": "تحليلات",
     "preview": "استعراض الخريطة",
-    "client": "عميل"
+    "client": "عميل",
+    "accountUpdatedSuccessfully": "تم تعديل الحساب بنجاح",
+    "captainProfile": "الملف الشخصي للكابتن",
+    "memberScince": "عضو منذ",
+    "updatePassword": "تعديل كلمة السر",
+    "lastPasswordUpdate": "تاريخ آخر تعديل لكلمة السر",
+    "passwordUpdated": "تم تحديث كلمة المرور بنجاح"
 
 
 

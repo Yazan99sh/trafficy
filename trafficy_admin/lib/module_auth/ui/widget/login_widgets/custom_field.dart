@@ -14,7 +14,7 @@ class CustomLoginFormField extends StatefulWidget {
   final bool last;
   final bool password;
   final FocusNode? focusNode;
-
+  final Function(String)? onChanged;
   @override
   _CustomLoginFormFieldState createState() => _CustomLoginFormFieldState();
 
@@ -29,7 +29,8 @@ class CustomLoginFormField extends StatefulWidget {
       this.readOnly = false,
       this.onTap,
       this.last = false,
-      this.password = false});
+      this.password = false,
+      this.onChanged});
 }
 
 class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
@@ -56,6 +57,9 @@ class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
                   autovalidateMode: mode,
                   onChanged: (s) {
                     setState(() {});
+                    if (widget.onChanged != null) {
+                      widget.onChanged!(s);
+                    }
                   },
                   toolbarOptions: const ToolbarOptions(
                       copy: true, paste: true, selectAll: true, cut: true),
